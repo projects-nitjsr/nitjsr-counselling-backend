@@ -7,16 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amanjha21/nitjsr-counselling-backend.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/amanjha21/nitjsr-counselling-backend/issues"
-  },
-  "homepage": "https://github.com/amanjha21/nitjsr-counselling-backend#readme",
   "dependencies": {
     "compression": "^1.7.4",
     "cors": "^2.8.5",
