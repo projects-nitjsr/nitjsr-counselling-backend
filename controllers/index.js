@@ -5,6 +5,6 @@ module.exports = {
     signup: require("./auth/signup"),
   },
   user: {
-    getUserByRegNo: require("./user/getUserByRegNo"),
+    getStudentByRegNo: require("./student/getStudentByRegNo"),
   },
 };
