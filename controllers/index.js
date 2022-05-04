@@ -4,7 +4,10 @@ module.exports = {
     logout: require("./auth/logout"),
     signup: require("./auth/signup"),
   },
-  user: {
+  student: {
     getStudentByRegNo: require("./student/getStudentByRegNo"),
+  },
+  college: {
+    getCollegeById: require("./college/getCollegeById"),
   },
 };
