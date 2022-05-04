@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const util = require("util");
 
 let pool = mysql.createPool({
   host: process.env.MYSQL_DB_ENDPOINT,
@@ -18,5 +19,8 @@ pool.getConnection((err, connection) => {
   if (connection) connection.release();
   return;
 });
+
+// node native promisify
+pool.queryAsync = util.promisify(pool.query).bind(pool);
 
 module.exports = pool;
