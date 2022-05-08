@@ -28,6 +28,8 @@ const login = async (req, res) => {
             },
             process.env.SECRET
           );
+          let sql = `UPDATE student_credentials SET token = ? where regno = ?`;
+          await db.queryAsync(sql, [accessToken, regno]);
           res.status(200).json({
             status: 1,
             accessToken,
