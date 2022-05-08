@@ -35,6 +35,7 @@ app.use(
   })
 );
 
+app.use(express.json());
 //Routes
 app.use("/", routes);
 
