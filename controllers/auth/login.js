@@ -4,7 +4,7 @@ const login = async (req, res) => {
   try {
     const regno = req.body.regno;
     const password = req.body.password;
-
+    // const role = req.body.role;
     if (!regno || !password) {
       res.status(401).json({
         message: "Missing parameter",
@@ -13,7 +13,6 @@ const login = async (req, res) => {
     } else {
       let sql = `SELECT * from student_credentials where regno = ?`;
       const [student] = await db.queryAsync(sql, [regno]);
-
       if (!student) {
         res.status(200).json({
           message: "Bad Credentials",
