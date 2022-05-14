@@ -22,7 +22,6 @@ CREATE TABLE secretary (
 
 CREATE TABLE center_incharge (
 	email varchar(255) NOT NULL,
-	email varchar(255) NOT NULL,
 	name varchar(255) NOT NULL,
 	phone varchar(255) NOT NULL,
 	collegeId varchar(255) NOT NULL UNIQUE,
