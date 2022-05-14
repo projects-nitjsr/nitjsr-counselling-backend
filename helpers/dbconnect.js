@@ -4,8 +4,8 @@ const util = require("util");
 let pool = mysql.createPool({
   host: process.env.MYSQL_DB_ENDPOINT,
   ssl: true,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
 
   database: process.env.DATABASE,
   multipleStatements: true,
