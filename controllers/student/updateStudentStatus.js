@@ -54,6 +54,27 @@ const updateStudentStatus = async (req, res) => {
       );
     }
 
+    if (req.params.confirmationPending) {
+      await db.queryAsync(
+        "UPDATE student_status SET confirmationPending = ? WHERE regno = ?",
+        [req.params.confirmationPending, regNo]
+      );
+    }
+
+    if (req.params.verifyingOfficer) {
+      await db.queryAsync(
+        "UPDATE student_status SET verifying_officer = ? WHERE regno = ?",
+        [req.params.verifyingOfficer, regNo]
+      );
+    }
+
+    if (req.params.verifyingCollege) {
+      await db.queryAsync(
+        "UPDATE student_status SET verifying_college = ? WHERE regno = ?",
+        [req.params.verifyingCollege, regNo]
+      );
+    }
+
     res.status(200).json({ success: true, message: "Update successful" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
