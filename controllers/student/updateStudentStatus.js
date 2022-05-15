@@ -13,6 +13,12 @@ const updateStudentStatus = async (req, res) => {
       throw new Error("No such student found!");
     }
 
+    if (studentStatus.applicationStatus !== "R") {
+      return res
+        .status(401)
+        .json({ success: false, message: "Unauthorized access" });
+    }
+
     if (req.params.applicationStatus) {
       await db.queryAsync(
         "UPDATE student_status SET applicationStatus = ? WHERE regno = ?",
