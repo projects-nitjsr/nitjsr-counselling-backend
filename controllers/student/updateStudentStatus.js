@@ -13,7 +13,7 @@ const updateStudentStatus = async (req, res) => {
       throw new Error("No such student found!");
     }
 
-    if (studentStatus.applicationStatus !== "R") {
+    if (studentStatus.applicationStatus !== 3) {
       return res
         .status(401)
         .json({ success: false, message: "Unauthorized access" });
