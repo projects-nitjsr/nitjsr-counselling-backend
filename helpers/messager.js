@@ -3,7 +3,7 @@ const { CourierClient } =require("@trycourier/courier");
 const messager=async(phoneNumber,messageTitle,messageData)=>{
 
  const courier = CourierClient(
-   { authorizationToken: process.env.CLOUDINARY_TOKEN});
+   { authorizationToken: process.env.COURIER_TOKEN});
  
  const { requestId } = await courier.send({
    message: {

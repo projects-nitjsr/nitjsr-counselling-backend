@@ -1,6 +1,6 @@
 const { CourierClient } = require("@trycourier/courier");
 const mailer=async(mailID,studentName)=>{
-  const courier = CourierClient({ authorizationToken: process.env.CLOUDINARY_TOKEN });
+  const courier = CourierClient({ authorizationToken: process.env.COURIER_TOKEN });
 
 const { requestId } = await courier.send({
   message: {
