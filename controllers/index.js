@@ -13,6 +13,9 @@ module.exports = {
   },
   college: {
     getCollegeById: require("./college/getCollegeById"),
+    getCollegeList:  require("./college/getCollegeList"),
+    updateCollegeById:  require("./college/updateCollegeById"),
+    deleteCollegeById:  require("./college/deleteCollegeById"),
   },
   result: {
     getResult: require("./result/getResult"),
