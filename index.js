@@ -45,7 +45,5 @@ app.get("/", (req, res) => {
   });
 });
 
-
-
 //Server Start
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
