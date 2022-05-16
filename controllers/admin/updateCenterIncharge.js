@@ -35,6 +35,10 @@ module.exports = async (req, res) => {
         [profile_image_url, email]
       );
     }
+    res.status(200).json({
+      success: true,
+      message: "Details for Center Incharge Updated!! ",
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
