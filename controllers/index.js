@@ -14,4 +14,8 @@ module.exports = {
   college: {
     getCollegeById: require("./college/getCollegeById"),
   },
+  result: {
+    getResult: require("./result/getResult"),
+    getStudentResult: require("./result/getStudentResult"),
+  },
 };
