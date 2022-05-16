@@ -1,12 +1,13 @@
 const db = require("../../helpers/dbconnect");
 
 const getStudentResult = async (req, res) => {
-  const studentId = req.params.id;
+  const studentRegNo = req.params.regNo;
 
   try {
-    const results = await db.queryAsync("SELECT * FROM result WHERE id = ?", [
-      studentId,
-    ]);
+    const results = await db.queryAsync(
+      "SELECT * FROM result WHERE regNo = ?",
+      [studentRegNo]
+    );
 
     if (results.length == 0) {
       throw new Error("Student's result not found");
