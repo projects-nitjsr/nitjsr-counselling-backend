@@ -19,6 +19,7 @@ module.exports = {
     deleteCenterIncharge: require("./admin/deleteCenterIncharge"),
     getCenterIncharge: require("./admin/getCenterIncharge"),
     updateCenterIncharge: require("./admin/updateCenterIncharge"),
+  },
   result: {
     getResult: require("./result/getResult"),
     getStudentResult: require("./result/getStudentResult"),
