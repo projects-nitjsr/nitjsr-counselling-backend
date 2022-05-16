@@ -19,59 +19,59 @@ const updateStudentStatus = async (req, res) => {
         .json({ success: false, message: "Unauthorized access" });
     }
 
-    if (req.params.applicationStatus) {
+    if (req.body.applicationStatus) {
       await db.queryAsync(
         "UPDATE student_status SET applicationStatus = ? WHERE regno = ?",
-        [req.params.applicationStatus, regNo]
+        [req.body.applicationStatus, regNo]
       );
     }
 
-    if (req.params.failureDesc) {
+    if (req.body.failureDesc) {
       await db.queryAsync(
         "UPDATE student_status SET failureDesc = ? WHERE regno = ?",
-        [req.params.failureDesc, regNo]
+        [req.body.failureDesc, regNo]
       );
     }
 
-    if (req.params.acceptedBy) {
+    if (req.body.acceptedBy) {
       await db.queryAsync(
         "UPDATE student_status SET acceptedBy = ? WHERE regno = ?",
-        [req.params.acceptedBy, regNo]
+        [req.body.acceptedBy, regNo]
       );
     }
 
-    if (req.params.rejectedBy) {
+    if (req.body.rejectedBy) {
       await db.queryAsync(
         "UPDATE student_status SET rejectedBy = ? WHERE regno = ?",
-        [req.params.rejectedBy, regNo]
+        [req.body.rejectedBy, regNo]
       );
     }
 
-    if (req.params.confirmationStatus) {
+    if (req.body.confirmationStatus) {
       await db.queryAsync(
         "UPDATE student_status SET confirmationStatus = ? WHERE regno = ?",
-        [req.params.confirmationStatus, regNo]
+        [req.body.confirmationStatus, regNo]
       );
     }
 
-    if (req.params.confirmationPending) {
+    if (req.body.confirmationPending) {
       await db.queryAsync(
         "UPDATE student_status SET confirmationPending = ? WHERE regno = ?",
-        [req.params.confirmationPending, regNo]
+        [req.body.confirmationPending, regNo]
       );
     }
 
-    if (req.params.verifyingOfficer) {
+    if (req.body.verifyingOfficer) {
       await db.queryAsync(
         "UPDATE student_status SET verifying_officer = ? WHERE regno = ?",
-        [req.params.verifyingOfficer, regNo]
+        [req.body.verifyingOfficer, regNo]
       );
     }
 
-    if (req.params.verifyingCollege) {
+    if (req.body.verifyingCollege) {
       await db.queryAsync(
         "UPDATE student_status SET verifying_college = ? WHERE regno = ?",
-        [req.params.verifyingCollege, regNo]
+        [req.body.verifyingCollege, regNo]
       );
     }
 
