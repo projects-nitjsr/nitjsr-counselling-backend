@@ -9,9 +9,16 @@ module.exports = async (req, res) => {
 
   try {
     await db.queryAsync(
+      "INSERT INTO admin ( email , designation , profile_image_url) values (? ,? ,?)",
+      [email, "Center Incharge", ""]
+    );
+    await db.queryAsync(
       "INSERT INTO center_incharge (email , name , phone , college , college_email) values (? ,? ,?,?,?)",
       [email, name, phone, college, collegeEmail]
     );
+    // create a random password
+    // assign the password to the center incharge
+    // send the password to the center incharge email
     res
       .status(200)
       .json({ success: true, message: "Center Incharge Created Successfully" });
