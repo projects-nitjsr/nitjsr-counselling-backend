@@ -8,7 +8,6 @@ cloudinary.config({
 });
 const uploadImage = async (data) => {
     try {
-      console.log(data);
         if (
             data.mimetype !== "image/jpeg" &&
             data.mimetype !== "image/png" &&
@@ -40,4 +39,15 @@ const uploadImage = async (data) => {
     }
   };
 
-  module.exports={uploadImage};
+  const deleteImage =async(imageUrl) =>  {
+    try{
+      let fileName = imageUrl.split(`/${process.env.CLOUDINARY_NAME}/`)[1];
+      let publicId = `${process.env.CLOUDINARY_NAME}/` + fileName.substr(0, fileName.length - 4);
+      await cloudinary.uploader.destroy(publicId, function (error, result) {
+        error && console.log(error);
+      });}
+      catch (err) {
+        console.error(err);}
+    };
+
+  module.exports={uploadImage,deleteImage};
