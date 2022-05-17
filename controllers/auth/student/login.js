@@ -1,4 +1,4 @@
-const db = require("../../helpers/dbconnect");
+const db = require("../../../helpers/dbconnect");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
