@@ -14,6 +14,9 @@ module.exports = {
   },
   college: {
     getCollegeById: require("./college/getCollegeById"),
+    getCollegeList:  require("./college/getCollegeList"),
+    updateCollegeById:  require("./college/updateCollegeById"),
+    deleteCollegeById:  require("./college/deleteCollegeById"),
   },
   admin: {
     createCenterIncharge: require("./admin/createCenterIncharge"),
