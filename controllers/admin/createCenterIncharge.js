@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     });
     // assign the password to the center incharge
     await db.queryAsync(
-      "INSERT INTO admin_credentials VALUES ( password = ?) WHERE email = ? ",
+      "INSERT INTO admin_credentials (password) VALUES (?) WHERE email = ? ",
       [password, email]
     );
     // send the password to the center incharge email
