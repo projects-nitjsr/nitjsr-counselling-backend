@@ -5,6 +5,7 @@ const log = async (ip, logMessage, user) => {
     [ip, logMessage, user]
   );
 };
+
 const adminLog = async (ip, logMessage, email) => {
   await db.queryAsync(
     "INSERT INTO admin_session(timestamp,ip,log,email) VALUES(current_timestamp(),?,?,?)",
@@ -17,6 +18,7 @@ const getLog = async (noOfLogs) => {
   );
   return logs;
 };
+
 const getAdminLog = async (noOfLogs) => {
   const logs = await db.queryAsync(
     `SELECT * FROM (SELECT * FROM admin_session ORDER BY timestamp DESC LIMIT ${noOfLogs} )Var1 ORDER BY timestamp ASC;`
