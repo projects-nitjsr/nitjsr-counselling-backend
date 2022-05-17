@@ -1,4 +1,4 @@
-const signup = (req, res) => {
-  res.send("signup");
+const register = (req, res) => {
+  res.send("register");
 };
-module.exports = signup;
+module.exports = register;

@@ -67,7 +67,7 @@ CREATE TABLE verifying_officers (
 
 CREATE TABLE admin (
 	email varchar(255) NOT NULL,
-	designation enum('s', 'c', 'vo', 'ci') NOT NULL,
+	designation enum('c', 's', 'ci', 'vo') NOT NULL,
 	profile_image_url varchar(255),
 	PRIMARY KEY (email)
 );
