@@ -5,7 +5,7 @@ const getStudentResult = async (req, res) => {
 
   try {
     const results = await db.queryAsync(
-      "SELECT * FROM result WHERE regNo = ?",
+      "SELECT * FROM result WHERE regno = ?",
       [studentRegNo]
     );
 
