@@ -19,8 +19,12 @@ module.exports = async (req, res) => {
     // create a random password
 
     const password = generator.generate({
-      length: 8,
+      length: 10,
       numbers: true,
+      symbols: true,
+      lowercase: true,
+      uppercase: true,
+      strict: true,
     });
     // assign the password to the center incharge
     await db.queryAsync(
