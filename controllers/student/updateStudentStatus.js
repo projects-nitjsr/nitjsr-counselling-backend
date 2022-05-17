@@ -20,7 +20,6 @@ const updateStudentStatus = async (req, res) => {
     }
 
     if (req.body.applicationStatus) {
-      console.log(req.body.applicationStatus);
       await db.queryAsync(
         "UPDATE student_status SET applicationStatus = ? WHERE regno = ?",
         [req.body.applicationStatus, regNo]
