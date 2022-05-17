@@ -29,8 +29,8 @@ const updateStudentStatus = async (req, res) => {
       verifyingCollege,
     } = req.body;
 
-    const sqlQuery = `UPDATE student_status SET applicationStatus = ?, failureDesc = ?, acceptedBy = ?, rejectedBy = ?, confirmationPending = ?,verifying_officer = ?, verifying_college = ?
-    WHERE regNo = ?`;
+    const sqlQuery =
+      "UPDATE student_status SET applicationStatus = ?, failureDesc = ?, acceptedBy = ?, rejectedBy = ?, confirmationPending = ?,verifying_officer = ?, verifying_college = ? WHERE regNo = ?";
 
     await db.queryAsync(sqlQuery, [
       applicationStatus || studentStatus[0].applicationStatus,
