@@ -19,7 +19,7 @@ module.exports=mailer;
 //drivercode
 // const mailer=require ("../helpers/mailer")
 // const test = async (req, res) => {
-//     await mailer("sarthakgoel1234@gmail.com","sarthak")
+//     await mailer("sarthakgoel1234@gmail.com","sarthak","reason for sending mail","link to be redirected")
 //     res.send("message sent succesfully")
 // };
 // module.exports = test;
