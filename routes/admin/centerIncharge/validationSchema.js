@@ -5,7 +5,7 @@ const createCenterInchargeValidation = Joi.object({
   name: Joi.string().required(),
   phone: Joi.string().required(),
   college: Joi.string().required(),
-  collegeEmail: Joi.string.required().email(),
+  collegeEmail: Joi.string().required().email(),
 });
 
 const deleteCenterInchargeValidation = Joi.object({
