@@ -19,61 +19,29 @@ const updateStudentStatus = async (req, res) => {
         .json({ success: false, message: "Unauthorized access" });
     }
 
-    if (req.body.applicationStatus) {
-      await db.queryAsync(
-        "UPDATE student_status SET applicationStatus = ? WHERE regno = ?",
-        [req.body.applicationStatus, regNo]
-      );
-    }
+    const {
+      applicationStatus,
+      failureDesc,
+      acceptedBy,
+      rejectedBy,
+      confirmationPending,
+      verifyingOfficer,
+      verifyingCollege,
+    } = req.body;
 
-    if (req.body.failureDesc) {
-      await db.queryAsync(
-        "UPDATE student_status SET failureDesc = ? WHERE regno = ?",
-        [req.body.failureDesc, regNo]
-      );
-    }
+    const sqlQuery = `UPDATE student_status SET applicationStatus = ?, failureDesc = ?, acceptedBy = ?, rejectedBy = ?, confirmationPending = ?,verifying_officer = ?, verifying_college = ?
+    WHERE regNo = ?`;
 
-    if (req.body.acceptedBy) {
-      await db.queryAsync(
-        "UPDATE student_status SET acceptedBy = ? WHERE regno = ?",
-        [req.body.acceptedBy, regNo]
-      );
-    }
-
-    if (req.body.rejectedBy) {
-      await db.queryAsync(
-        "UPDATE student_status SET rejectedBy = ? WHERE regno = ?",
-        [req.body.rejectedBy, regNo]
-      );
-    }
-
-    if (req.body.confirmationStatus) {
-      await db.queryAsync(
-        "UPDATE student_status SET confirmationStatus = ? WHERE regno = ?",
-        [req.body.confirmationStatus, regNo]
-      );
-    }
-
-    if (req.body.confirmationPending) {
-      await db.queryAsync(
-        "UPDATE student_status SET confirmationPending = ? WHERE regno = ?",
-        [req.body.confirmationPending, regNo]
-      );
-    }
-
-    if (req.body.verifyingOfficer) {
-      await db.queryAsync(
-        "UPDATE student_status SET verifying_officer = ? WHERE regno = ?",
-        [req.body.verifyingOfficer, regNo]
-      );
-    }
-
-    if (req.body.verifyingCollege) {
-      await db.queryAsync(
-        "UPDATE student_status SET verifying_college = ? WHERE regno = ?",
-        [req.body.verifyingCollege, regNo]
-      );
-    }
+    await db.queryAsync(sqlQuery, [
+      applicationStatus || studentStatus[0].applicationStatus,
+      failureDesc || studentStatus[0].failureDesc,
+      acceptedBy || studentStatus[0].acceptedBy,
+      rejectedBy || studentStatus[0].rejectedBy,
+      confirmationPending || studentStatus[0].confirmationPending,
+      verifyingOfficer || studentStatus[0].verifying_officer,
+      verifyingCollege || studentStatus[0].verifying_college,
+      regNo,
+    ]);
 
     res.status(200).json({ success: true, message: "Update successful" });
   } catch (err) {
