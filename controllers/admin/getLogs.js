@@ -1,7 +1,7 @@
 const logger = require("../../helpers/logger");
 
 const getLogs = async (req, res) => {
-  const noOfLogs = req.params.noOfLogs;
+  const noOfLogs = req.params.noOfLogs || 10;
 
   try {
     if (noOfLogs > 200) {
