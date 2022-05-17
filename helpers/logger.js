@@ -1,4 +1,5 @@
 const db = require("../helpers/dbconnect");
+
 const log = async (ip, logMessage, user) => {
   await db.queryAsync(
     "INSERT INTO logger(timestamp,ip,log,user) VALUES(current_timestamp(),?,?,?)",
@@ -12,6 +13,7 @@ const adminLog = async (ip, logMessage, email) => {
     [ip, logMessage, email]
   );
 };
+
 const getLog = async (noOfLogs) => {
   const logs = await db.queryAsync(
     `SELECT * FROM (SELECT * FROM logger ORDER BY timestamp DESC LIMIT ${noOfLogs} )Var1 ORDER BY timestamp ASC;`
@@ -25,4 +27,5 @@ const getAdminLog = async (noOfLogs) => {
   );
   return logs;
 };
+
 module.exports = { log, adminLog, getLog, getAdminLog };
