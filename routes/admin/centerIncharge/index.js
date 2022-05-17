@@ -1,9 +1,26 @@
 const router = require("express").Router();
 const controllers = require("../../../controllers");
-
-router.post("/create", controllers.admin.createCenterIncharge);
-router.delete("/delete", controllers.admin.deleteCenterIncharge);
+const validation = require("../../../middlewares/validation");
+const validationSchema = require("./validationSchema");
+//create Center Incharge route
+router.post(
+  "/create",
+  validation(validationSchema.createCenterInchargeValidation),
+  controllers.admin.createCenterIncharge
+);
+// delete Center Incharge route
+router.delete(
+  "/delete",
+  validation(validationSchema.deleteCenterInchargeValidation),
+  controllers.admin.deleteCenterIncharge
+);
+// get Center Incharge route
 router.get("/", controllers.admin.getCenterIncharge);
-router.post("/update", controllers.admin.updateCenterIncharge);
+//update Center Incharge Details Route
+router.post(
+  "/update",
+  validation(validationSchema.updateCenterInchargeValidation),
+  controllers.admin.updateCenterIncharge
+);
 
 module.exports = router;
