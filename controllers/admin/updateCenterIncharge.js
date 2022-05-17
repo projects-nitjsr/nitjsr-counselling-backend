@@ -8,8 +8,6 @@ module.exports = async (req, res) => {
 
   const collegeEmail = req.body.collegeEmail;
 
-  // const profile_image_url = req.body.profile_image_url;
-
   try {
     const centerInchargeExist = await db.queryAsync(
       "SELECT * FROM admin WHERE email = ?)",
