@@ -5,15 +5,16 @@ const jwt = require("jsonwebtoken");
 //adminlogin controller
 const adminLogin = async (req, res) => {
   try {
-    const { email, password, designation } = req.body;
-    if (!email || !password || !designation) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       res.status(401).json({
         message: "Missing parameter",
         status: 0,
       });
     } else {
-      let sql = `SELECT * from admin_credentials where email = ?`;
+      let sql = `SELECT * FROM admin WHERE email = ?`;
       const [admin] = await db.queryAsync(sql, [email]);
+      console.log(admin);
       if (!admin) {
         res.status(200).json({
           message: "Bad Credentials",
@@ -21,11 +22,12 @@ const adminLogin = async (req, res) => {
         });
       } else {
         let check = await bcrypt.compare(password.trim(), admin.password);
+        console.log(admin);
         if (check) {
           let accessToken = jwt.sign(
             {
               email: admin.email,
-              designation: designation,
+              designation: admin.designation,
             },
             process.env.ADMIN_SECRET
           );
