@@ -1,5 +1,5 @@
 const db = require("../../helpers/dbconnect");
-
+const generator = require("generate-password");
 module.exports = async (req, res) => {
   const email = req.body.email;
   const name = req.body.name;
@@ -17,8 +17,18 @@ module.exports = async (req, res) => {
       [email, name, phone, college, collegeEmail]
     );
     // create a random password
+
+    const password = generator.generate({
+      length: 8,
+      numbers: true,
+    });
     // assign the password to the center incharge
+    await db.queryAsync(
+      "INSERT INTO admin_credentials VALUES ( password = ?) WHERE email = ? ",
+      [password, email]
+    );
     // send the password to the center incharge email
+
     res
       .status(200)
       .json({ success: true, message: "Center Incharge Created Successfully" });
