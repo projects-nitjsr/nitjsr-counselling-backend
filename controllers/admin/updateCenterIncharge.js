@@ -12,34 +12,19 @@ module.exports = async (req, res) => {
 
   try {
     const centerInchargeExist = await db.queryAsync(
-      "SELECT EXISTS(SELECT 1 FROM admin WHERE email = ? )",
+      "SELECT * FROM admin WHERE email = ?)",
       [email]
     );
-    if (centerInchargeExist > 0) {
-      if (name) {
-        await db.queryAsync(
-          "UPDATE center_incharge SET name = ? WHERE email = ?",
-          [name, email]
-        );
-      }
-      if (phone) {
-        await db.queryAsync(
-          "UPDATE center_incharge SET phone = ? WHERE email = ?",
-          [phone, email]
-        );
-      }
-      if (collegeEmail) {
-        await db.queryAsync(
-          "UPDATE center_incharge SET college_email = ? WHERE email = ?",
-          [collegeEmail, email]
-        );
-      }
-      if (profile_image_url) {
-        await db.queryAsync(
-          "UPDATE admin SET profile_image_url = ? WHERE email = ?",
-          [profile_image_url, email]
-        );
-      }
+    if (centerInchargeExist.length > 0) {
+      const query =
+        "UPDATE center_incharge SET email= ? , name = ?, phone = ?, phone =? ,college=?. college_email = ?  ";
+      await db.queryAsync(query, [
+        email || centerInchargeExist[0].email,
+        name || centerInchargeExist[0].name,
+        phone || centerInchargeExist[0].phone,
+        collegeEmail || centerInchargeExist[0].college_email,
+      ]);
+
       res.status(200).json({
         success: true,
         message: "Details for Center Incharge Updated!! ",
