@@ -1,10 +1,10 @@
 const db = require("../../helpers/dbconnect");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   try {
-    const regno = req.body.regno;
-    const password = req.body.password;
-    // const role = req.body.role;
+    const { regno, password } = req.body;
     if (!regno || !password) {
       res.status(401).json({
         message: "Missing parameter",
@@ -26,13 +26,13 @@ const login = async (req, res) => {
               regno: student.regno,
               role: "student",
             },
-            process.env.SECRET
+            process.env.STUDENT_SECRET
           );
           let sql = `UPDATE student_credentials SET token = ? where regno = ?`;
           await db.queryAsync(sql, [accessToken, regno]);
           res.status(200).json({
             status: 1,
-            accessToken,
+            token: accessToken,
             role: "student",
           });
         } else {
@@ -50,4 +50,5 @@ const login = async (req, res) => {
     });
   }
 };
+
 module.exports = login;
