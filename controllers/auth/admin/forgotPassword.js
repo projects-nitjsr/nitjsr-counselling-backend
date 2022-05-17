@@ -10,7 +10,7 @@ const forgotPassword = async (req, res) => {
       });
     } else {
       const searchAdmin = `SELECT * FROM admin_credentials WHERE email = ?`;
-      const [admin] = db.queryAsync(searchAdmin, [email]);
+      const admin = db.queryAsync(searchAdmin, [email]);
       if (!admin) {
         res.status(200).json({
           message: "Not found",
@@ -22,14 +22,15 @@ const forgotPassword = async (req, res) => {
             email: admin.email,
           },
           process.env.ADMIN_FORGOT_PASSWORD_SECRET,
-          { expiresIn: "1h" }
+          { expiresIn: "1" }
         );
 
         //send email
         //url = process.env.FRONTEND_URL/reset?t=token
-        res.send(200).json({
-          message: `Email sent to ${email} with ans url to reset password`,
+        res.status(200).json({
+          message: `Email sent to ${email} with an url to reset password`,
           status: 1,
+          token: token,
         });
       }
     }

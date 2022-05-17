@@ -13,7 +13,7 @@ const adminLogin = async (req, res) => {
       });
     } else {
       let sql = `SELECT * from admin_credentials where email = ?`;
-      const [admin] = await db.queryAsync(sql, [email, role]);
+      const [admin] = await db.queryAsync(sql, [email]);
       if (!admin) {
         res.status(200).json({
           message: "Bad Credentials",

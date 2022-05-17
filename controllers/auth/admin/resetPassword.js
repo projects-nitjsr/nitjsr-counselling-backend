@@ -1,5 +1,7 @@
 const db = require("../../../helpers/dbconnect");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
 const resetPassword = async (req, res) => {
   try {
     const { email, password, token } = req.body;
@@ -11,7 +13,7 @@ const resetPassword = async (req, res) => {
     } else {
       await jwt.verify(token, process.env.ADMIN_FORGOT_PASSWORD_SECRET);
       const searchAdmin = `SELECT * FROM admin_credentials WHERE email = ?`;
-      const [admin] = db.queryAsync(searchAdmin, [email]);
+      const admin = db.queryAsync(searchAdmin, [email]);
       if (!admin) {
         res.status(200).json({
           message: "Not found",
@@ -32,7 +34,7 @@ const resetPassword = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: "Internal Server Error" + err.message,
+      message: "Internal Server Error " + err.message,
       status: 0,
     });
   }
