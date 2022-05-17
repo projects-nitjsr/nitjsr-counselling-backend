@@ -10,4 +10,9 @@ router.put(
 );
 router.delete("/deletestudent/:regNo", controllers.student.deleteStudent);
 
+router.put("/verify", controllers.verify.verifyStudent);
+router.put("/reject", controllers.verify.rejectStudent);
+router.put("/confirm", controllers.verify.confirmDecision);
+router.put("/deny", controllers.verify.denyDecision);
+
 module.exports = router;
