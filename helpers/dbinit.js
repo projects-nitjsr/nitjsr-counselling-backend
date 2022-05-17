@@ -48,12 +48,12 @@ CREATE TABLE center_incharge (
 CREATE TABLE colleges (
 	id varchar(255) NOT NULL,
 	name varchar(255) NOT NULL,
-	general int NOT NULL,
-	obc int NOT NULL,
-	sc int NOT NULL,
-	st int NOT NULL,
-	pwd int NOT NULL,
-	ews int NOT NULL,
+	general_seats int NOT NULL,
+	obc_seats int NOT NULL,
+	sc_seats int NOT NULL,
+	st_seats int NOT NULL,
+	pwd_seats int NOT NULL,
+	ews_seats int NOT NULL,
 	profile_image_url varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -61,13 +61,13 @@ CREATE TABLE colleges (
 CREATE TABLE verifying_officers (
 	email varchar(255) NOT NULL,
 	name varchar(255) NOT NULL,
-	collegeId varchar(255) NOT NULL UNIQUE,
+	college varchar(255) NOT NULL,
 	PRIMARY KEY (email)
 );
 
 CREATE TABLE admin (
 	email varchar(255) NOT NULL,
-	designation varchar(255) NOT NULL,
+	designation enum('s', 'c', 'vo', 'ci') NOT NULL,
 	profile_image_url varchar(255),
 	PRIMARY KEY (email)
 );
@@ -92,7 +92,7 @@ CREATE TABLE result (
 
 CREATE TABLE student_status (
 	regno varchar(255) NOT NULL,
-	applicationSatus enum('pending', 'verified', 'rejected') NOT NULL,
+	applicationStatus enum('pending', 'verified', 'rejected') NOT NULL,
 	failureDesc TEXT,
 	acceptedBy varchar(255),
 	rejectedBy varchar(255),
@@ -142,7 +142,7 @@ ALTER TABLE center_incharge ADD CONSTRAINT center_incharge_fk1 FOREIGN KEY (coll
 
 ALTER TABLE verifying_officers ADD CONSTRAINT verifying_officers_fk0 FOREIGN KEY (email) REFERENCES admin(email) ON DELETE CASCADE;
 
-ALTER TABLE verifying_officers ADD CONSTRAINT verifying_officers_fk1 FOREIGN KEY (collegeId) REFERENCES colleges(id) ON DELETE CASCADE;
+ALTER TABLE verifying_officers ADD CONSTRAINT verifying_officers_fk1 FOREIGN KEY (college) REFERENCES colleges(id) ON DELETE CASCADE;
 
 ALTER TABLE result ADD CONSTRAINT result_fk0 FOREIGN KEY (regno) REFERENCES student(regno) ON DELETE CASCADE;
 
