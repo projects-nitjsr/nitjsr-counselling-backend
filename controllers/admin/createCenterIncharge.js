@@ -38,10 +38,14 @@ SET autocommit =1
 
     // send the password to the center incharge email
 
-    res
-      .status(200)
-      .json({ success: true, message: "Center Incharge Created Successfully" });
+    res.status(200).json({
+      success: true,
+      message: "Center Incharge Created Successfully",
+    });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
   }
 };
