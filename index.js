@@ -11,18 +11,6 @@ const helmet = require("helmet");
 const responseTime = require("response-time");
 
 const compression = require("compression");
-const {
-  isAuthenticatedAdmin,
-} = require("./middlewares/admin/isAuthenticatedAdmin");
-const { isCenterIncharge } = require("./middlewares/admin/isCenterIncharge");
-const { isChairman } = require("./middlewares/admin/isChairman");
-const { isSecretary } = require("./middlewares/admin/isSecretary");
-const {
-  isVerifyingOfficer,
-} = require("./middlewares/admin/isVerifyingOfficer");
-const {
-  isAuthenticatedStudent,
-} = require("./middlewares/student/isAuthenticatedStudent");
 
 //gzip compression
 app.use(compression());
