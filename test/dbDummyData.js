@@ -248,7 +248,36 @@ VALUES
       ("CCQ59RJX1008","pending",false,"nkhfcacarr@nitsura.in","1000008"),
       ("CCQ59RJX1009","pending",false,"nkhfcacarr@nittiru.in","1000009"),
       ("CCQ59RJX1010","pending",false,"bhkdxvbvjj@nitalah.in","1000002");
-    
+
+      INSERT INTO logger(timestamp,ip,log,user) 
+      VALUES
+      (current_timestamp(),"1111:2222:3333:4444","this is test log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is a test log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is b test log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is c test log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is d test log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is f test log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is  ftest log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is sdctest log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is sdftest log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","thsfsfest log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","thsfdgt log","abc@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this isfsdt log","abc@test.com");
+
+      INSERT INTO admin_session(timestamp,ip,log,email) 
+      VALUES
+      (current_timestamp(),"1111:2222:3333:4444","this is test log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is a test log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is b test log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is c test log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is d test log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is f test log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is  ftest log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is sdctest log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this is sdftest log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","thsfsfest log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","thsfdgt log","admin@test.com"),
+      (current_timestamp(),"1111:2222:3333:4444","this isfsdt log","admin@test.com");
 `;
 
   // const jsonData = [

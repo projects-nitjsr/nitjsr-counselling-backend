@@ -25,7 +25,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE admin_credentials (
 	email varchar(255) NOT NULL ,
 	password varchar(255) NOT NULL,
-	token varchar(255) NOT NULL,
+	token varchar(255),
 	PRIMARY KEY (email)
 );
 
@@ -105,7 +105,7 @@ CREATE TABLE student_status (
 CREATE TABLE student_credentials (
 	regno varchar(255) NOT NULL,
 	password varchar(255) NOT NULL,
-	token varchar(255) NOT NULL,
+	token varchar(255),
 	PRIMARY KEY (regno)
 );
 
@@ -117,19 +117,21 @@ CREATE TABLE secretary (
 );
 
 CREATE TABLE logger (
+	id INT AUTO_INCREMENT NOT NULL,
 	timestamp DATETIME NOT NULL,
 	ip varchar(255) NOT NULL,
 	log varchar(255) NOT NULL,
 	user varchar(255) NOT NULL,
-	PRIMARY KEY (user)
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE admin_session (
+	id INT AUTO_INCREMENT NOT NULL,
 	timestamp DATETIME NOT NULL,
 	ip varchar(255) NOT NULL,
 	log varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
-	PRIMARY KEY (email)
+	PRIMARY KEY (id)
 );
 
 ALTER TABLE admin_credentials ADD CONSTRAINT admin_credentials_fk0 FOREIGN KEY (email) REFERENCES admin(email) ON DELETE CASCADE;
