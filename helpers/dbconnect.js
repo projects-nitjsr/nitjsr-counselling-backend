@@ -23,4 +23,11 @@ pool.getConnection((err, connection) => {
 // node native promisify
 pool.queryAsync = util.promisify(pool.query).bind(pool);
 
+//transaction in sql
+// SET autocommit=0;
+// START TRANSACTION;
+// ...query
+// COMMIT;
+// SET autocommit=1;
+
 module.exports = pool;
