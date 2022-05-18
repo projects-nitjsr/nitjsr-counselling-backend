@@ -1,8 +1,9 @@
 module.exports = {
   auth: {
-    login: require("./auth/login"),
-    logout: require("./auth/logout"),
-    signup: require("./auth/signup"),
+    adminLogin: require("./auth/admin/login"),
+    studentLogin: require("./auth/login"),
+    adminForgotPassword: require("./auth/admin/forgotPassword"),
+    adminResetPassword: require("./auth/admin/resetPassword"),
   },
   student: {
     getStudentByRegNo: require("./student/getStudentByRegNo"),
@@ -13,6 +14,9 @@ module.exports = {
   },
   college: {
     getCollegeById: require("./college/getCollegeById"),
+    getCollegeList: require("./college/getCollegeList"),
+    updateCollegeById: require("./college/updateCollegeById"),
+    deleteCollegeById: require("./college/deleteCollegeById"),
   },
   admin: {
     createCenterIncharge: require("./admin/createCenterIncharge"),
@@ -25,6 +29,8 @@ module.exports = {
     getVerifyingOfficerByEmail: require("./admin/getVerifyingOfficerByEmail"),
     getVerifyingOfficerByCollegeId: require("./admin/getVerifyingOfficerByCollegeId"),
     updateVerifyingOfficer: require("./admin/updateVerifyingOfficer"),
+    getLogs: require("./admin/getLogs"),
+    getAdminLogs: require("./admin/getAdminLogs"),
   },
   result: {
     getResult: require("./result/getResult"),
