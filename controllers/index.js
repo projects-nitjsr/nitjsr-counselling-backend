@@ -16,20 +16,32 @@ module.exports = {
   },
   college: {
     getCollegeById: require("./college/getCollegeById"),
-    getCollegeList:  require("./college/getCollegeList"),
-    updateCollegeById:  require("./college/updateCollegeById"),
-    deleteCollegeById:  require("./college/deleteCollegeById"),
+    getCollegeList: require("./college/getCollegeList"),
+    updateCollegeById: require("./college/updateCollegeById"),
+    deleteCollegeById: require("./college/deleteCollegeById"),
   },
   admin: {
     createCenterIncharge: require("./admin/createCenterIncharge"),
     deleteCenterIncharge: require("./admin/deleteCenterIncharge"),
     getCenterIncharge: require("./admin/getCenterIncharge"),
     updateCenterIncharge: require("./admin/updateCenterIncharge"),
-    getLogs : require("./admin/getLogs"),
-    getAdminLogs : require("./admin/getAdminLogs"),
+    createVerifyingOfficer: require("./admin/createVerifyingOfficer"),
+    deleteVerifyingOfficer: require("./admin/deleteVerifyingOfficer"),
+    getVerifyingOfficer: require("./admin/getVerifyingOfficer"),
+    getVerifyingOfficerByEmail: require("./admin/getVerifyingOfficerByEmail"),
+    getVerifyingOfficerByCollegeId: require("./admin/getVerifyingOfficerByCollegeId"),
+    updateVerifyingOfficer: require("./admin/updateVerifyingOfficer"),
+    getLogs: require("./admin/getLogs"),
+    getAdminLogs: require("./admin/getAdminLogs"),
   },
   result: {
     getResult: require("./result/getResult"),
     getStudentResult: require("./result/getStudentResult"),
   },
+  verify: {
+    verifyStudent: require("./verify/verifyStudent"),
+    rejectStudent: require("./verify/rejectStudent"),
+    confirmDecision: require("./verify/confirmDecision"),
+    denyDecision: require("./verify/denyDecision"),
+  }
 };
