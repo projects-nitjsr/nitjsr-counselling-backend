@@ -1,9 +1,11 @@
 module.exports = {
   auth: {
     adminLogin: require("./auth/admin/login"),
-    studentLogin: require("./auth/login"),
+    studentLogin: require("./auth/student/login"),
     adminForgotPassword: require("./auth/admin/forgotPassword"),
     adminResetPassword: require("./auth/admin/resetPassword"),
+    studentForgotPassword: require("./auth/student/forgotPassword"),
+    studentResetPassword: require("./auth/student/resetPassword"),
   },
   student: {
     getStudentByRegNo: require("./student/getStudentByRegNo"),
