@@ -8,6 +8,8 @@ module.exports = {
     getStudentByRegNo: require("./student/getStudentByRegNo"),
     getStudents: require("./student/getStudents"),
     getStudentStatus: require("./student/getStudentStatus"),
+    getStudentsByVerifingCollege: require("./student/getstudentsbyverifingcollege"),
+    getStudentsByVeryfingOfficer: require("./student/getstudentsbyveryfingofficer"),
     updateStudentStatus: require("./student/updateStudentStatus"),
     deleteStudent: require("./student/deleteStudent"),
   },
