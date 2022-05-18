@@ -45,5 +45,9 @@ module.exports = {
     rejectStudent: require("./verify/rejectStudent"),
     confirmDecision: require("./verify/confirmDecision"),
     denyDecision: require("./verify/denyDecision"),
+  },
+  notice:{
+    getNotices:require("./notice/getNotices"),
+    createNotice:require("./notice/createNotice"),
   }
 };
