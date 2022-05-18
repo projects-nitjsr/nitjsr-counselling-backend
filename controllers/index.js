@@ -36,4 +36,10 @@ module.exports = {
     getResult: require("./result/getResult"),
     getStudentResult: require("./result/getStudentResult"),
   },
+  verify: {
+    verifyStudent: require("./verify/verifyStudent"),
+    rejectStudent: require("./verify/rejectStudent"),
+    confirmDecision: require("./verify/confirmDecision"),
+    denyDecision: require("./verify/denyDecision"),
+  }
 };
