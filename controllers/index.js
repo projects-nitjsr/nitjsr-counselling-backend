@@ -19,6 +19,12 @@ module.exports = {
     deleteCenterIncharge: require("./admin/deleteCenterIncharge"),
     getCenterIncharge: require("./admin/getCenterIncharge"),
     updateCenterIncharge: require("./admin/updateCenterIncharge"),
+    createVerifyingOfficer: require("./admin/createVerifyingOfficer"),
+    deleteVerifyingOfficer: require("./admin/deleteVerifyingOfficer"),
+    getVerifyingOfficer: require("./admin/getVerifyingOfficer"),
+    getVerifyingOfficerByEmail: require("./admin/getVerifyingOfficerByEmail"),
+    getVerifyingOfficerByCollegeId: require("./admin/getVerifyingOfficerByCollegeId"),
+    updateVerifyingOfficer: require("./admin/updateVerifyingOfficer"),
   },
   result: {
     getResult: require("./result/getResult"),
