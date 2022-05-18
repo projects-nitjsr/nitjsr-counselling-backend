@@ -12,3 +12,8 @@ function sortMeritListByRank(meritList) {
 function sortMeritListByCategory(meritList) {
   return newMeritList = meritList.sortBy('category');
 }
+
+
+function sortMeritListByStudentId(meritList) {
+  return newMeritList = meritList.sortBy('studentId');
+}
