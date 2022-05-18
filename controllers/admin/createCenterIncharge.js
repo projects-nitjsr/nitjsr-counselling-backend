@@ -1,6 +1,7 @@
 const db = require("../../helpers/dbconnect");
-const generator = require("generate-password");
+const bcrypt = require("bcryptjs");
 const imageUploader = require("../../helpers/imageHandler");
+
 module.exports = async (req, res) => {
   const email = req.body.email;
   const name = req.body.name;
@@ -12,6 +13,19 @@ module.exports = async (req, res) => {
 
   try {
     const imageUrl = await imageUploader.uploadImage(image);
+
+    //check if the college has a center incharge
+    const centerInchargeNum = await db.queryAsync(
+      `SELECT email FROM center_incharge WHERE college = ?`,
+      [college]
+    );
+    if (centerInchargeNum.length > 0)
+      throw new Error("Center Incharge Exists For this College");
+
+    const hashedPassword = await bcrypt.hash(
+      password,
+      parseInt(process.env.SALT_ROUNDS)
+    );
 
     await db.queryAsync(
       ` SET autocommit =0 ;
@@ -32,7 +46,7 @@ SET autocommit =1
         college,
         collegeEmail,
         email,
-        password,
+        hashedPassword,
       ]
     );
 
