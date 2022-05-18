@@ -13,7 +13,7 @@ const resetPassword = async (req, res) => {
     } else {
       await jwt.verify(token, process.env.ADMIN_FORGOT_PASSWORD_SECRET);
       const searchAdmin = `SELECT * FROM admin_credentials WHERE email = ?`;
-      const admin = db.queryAsync(searchAdmin, [email]);
+      const [admin] = await db.queryAsync(searchAdmin, [email]);
       if (!admin) {
         res.status(200).json({
           message: "Not found",

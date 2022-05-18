@@ -1,5 +1,7 @@
 const db = require("../../../helpers/dbconnect");
 const jwt = require("jsonwebtoken");
+const mailer = require("../../../helpers/mailer");
+
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
@@ -10,7 +12,7 @@ const forgotPassword = async (req, res) => {
       });
     } else {
       const searchAdmin = `SELECT * FROM admin_credentials WHERE email = ?`;
-      const admin = db.queryAsync(searchAdmin, [email]);
+      const [admin] = await db.queryAsync(searchAdmin, [email]);
       if (!admin) {
         res.status(200).json({
           message: "Not found",
@@ -25,12 +27,17 @@ const forgotPassword = async (req, res) => {
           { expiresIn: "1h" }
         );
 
-        //send email
-        //url = process.env.FRONTEND_URL/reset?t=token
+        //Sending Mail for resetting password
+        await mailer(
+          admin.email,
+          "",
+          "To reset your password please, visit the link provided below : ",
+          `${process.env.FRONTEND_URL}/reset?t=${token}`
+        );
+
         res.status(200).json({
           message: `Email sent to ${email} with an url to reset password`,
           status: 1,
-          token: token,
         });
       }
     }
