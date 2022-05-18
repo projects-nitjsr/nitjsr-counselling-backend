@@ -12,9 +12,8 @@ const adminLogin = async (req, res) => {
         status: 0,
       });
     } else {
-      let sql = `SELECT * FROM admin WHERE email = ?`;
+      let sql = `SELECT * FROM admin JOIN admin_credentials ON admin.email = admin_credentials.email WHERE admin.email = ?`;
       const [admin] = await db.queryAsync(sql, [email]);
-      console.log(admin);
       if (!admin) {
         res.status(200).json({
           message: "Bad Credentials",
@@ -22,7 +21,6 @@ const adminLogin = async (req, res) => {
         });
       } else {
         let check = await bcrypt.compare(password.trim(), admin.password);
-        console.log(admin);
         if (check) {
           let accessToken = jwt.sign(
             {
@@ -37,7 +35,7 @@ const adminLogin = async (req, res) => {
             status: 1,
             token: accessToken,
             email: email,
-            designation: designation,
+            designation: admin.designation,
           });
         } else {
           res.status(401).json({
@@ -49,7 +47,7 @@ const adminLogin = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: "Internal Server Error ",
+      message: "Internal Server Error " + err.message,
       status: 0,
     });
   }

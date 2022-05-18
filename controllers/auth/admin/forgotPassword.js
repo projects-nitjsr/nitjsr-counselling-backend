@@ -22,7 +22,7 @@ const forgotPassword = async (req, res) => {
             email: admin.email,
           },
           process.env.ADMIN_FORGOT_PASSWORD_SECRET,
-          { expiresIn: "1" }
+          { expiresIn: "1h" }
         );
 
         //send email

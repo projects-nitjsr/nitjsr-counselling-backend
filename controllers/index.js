@@ -14,17 +14,17 @@ module.exports = {
   },
   college: {
     getCollegeById: require("./college/getCollegeById"),
-    getCollegeList:  require("./college/getCollegeList"),
-    updateCollegeById:  require("./college/updateCollegeById"),
-    deleteCollegeById:  require("./college/deleteCollegeById"),
+    getCollegeList: require("./college/getCollegeList"),
+    updateCollegeById: require("./college/updateCollegeById"),
+    deleteCollegeById: require("./college/deleteCollegeById"),
   },
   admin: {
     createCenterIncharge: require("./admin/createCenterIncharge"),
     deleteCenterIncharge: require("./admin/deleteCenterIncharge"),
     getCenterIncharge: require("./admin/getCenterIncharge"),
     updateCenterIncharge: require("./admin/updateCenterIncharge"),
-    getLogs : require("./admin/getLogs"),
-    getAdminLogs : require("./admin/getAdminLogs"),
+    getLogs: require("./admin/getLogs"),
+    getAdminLogs: require("./admin/getAdminLogs"),
   },
   result: {
     getResult: require("./result/getResult"),
