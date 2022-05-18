@@ -1,7 +1,7 @@
 const logger = require("../../helpers/logger");
 
-module.exports = async (req, res) => {
-  const noOfLogs = req.params.noOfLogs;
+const getLogs = async (req, res) => {
+  const noOfLogs = req.params.noOfLogs || 10;
 
   try {
     if (noOfLogs > 200) {
@@ -21,3 +21,5 @@ module.exports = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+module.exports = getLogs;
