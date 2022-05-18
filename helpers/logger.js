@@ -16,14 +16,14 @@ const adminLog = async (ip, logMessage, email) => {
 
 const getLog = async (noOfLogs) => {
   const logs = await db.queryAsync(
-    `SELECT * FROM (SELECT * FROM logger ORDER BY timestamp DESC LIMIT ${noOfLogs} )Var1 ORDER BY timestamp ASC;`
+    `SELECT * FROM (SELECT * FROM logger ORDER BY id DESC LIMIT ${noOfLogs} )Var1 ORDER BY id ASC;`
   );
   return logs;
 };
 
 const getAdminLog = async (noOfLogs) => {
   const logs = await db.queryAsync(
-    `SELECT * FROM (SELECT * FROM admin_session ORDER BY timestamp DESC LIMIT ${noOfLogs} )Var1 ORDER BY timestamp ASC;`
+    `SELECT * FROM (SELECT * FROM admin_session ORDER BY id DESC LIMIT ${noOfLogs} )Var1 ORDER BY id ASC;`
   );
   return logs;
 };
