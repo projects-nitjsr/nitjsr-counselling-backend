@@ -2,9 +2,12 @@ const router = require("express").Router();
 const controllers = require("../../../controllers");
 const validation = require("../../../middlewares/validation");
 const validationSchema = require("./validationSchema");
+const multerSingle = require("../../../middlewares/multerSingle");
+
 //create Center Incharge route
 router.post(
   "/create",
+  multerSingle,
   validation(validationSchema.createCenterInchargeValidation),
   controllers.admin.createCenterIncharge
 );
@@ -19,6 +22,7 @@ router.get("/", controllers.admin.getCenterIncharge);
 //update Center Incharge Details Route
 router.post(
   "/update",
+  multerSingle,
   validation(validationSchema.updateCenterInchargeValidation),
   controllers.admin.updateCenterIncharge
 );
