@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const centerInchargeList = await db.queryAsync(
       "SELECT * FROM admin WHERE designation = ?",
-      ["Center Incharge"]
+      ["ci"]
     );
     if (centerInchargeList.length == 0) {
       throw new Error("No Center Incharges Found");
