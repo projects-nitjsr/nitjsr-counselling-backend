@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 //adminlogin controller
 const adminLogin = async (req, res) => {
   try {
-    const { email, password, designation } = req.body;
-    if (!email || !password || !designation) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       res.status(401).json({
         message: "Missing parameter",
         status: 0,
       });
     } else {
-      let sql = `SELECT * from admin_credentials where email = ?`;
+      let sql = `SELECT * FROM admin JOIN admin_credentials ON admin.email = admin_credentials.email WHERE admin.email = ?`;
       const [admin] = await db.queryAsync(sql, [email]);
       if (!admin) {
         res.status(200).json({
@@ -25,7 +25,7 @@ const adminLogin = async (req, res) => {
           let accessToken = jwt.sign(
             {
               email: admin.email,
-              designation: designation,
+              designation: admin.designation,
             },
             process.env.ADMIN_SECRET
           );
@@ -35,7 +35,7 @@ const adminLogin = async (req, res) => {
             status: 1,
             token: accessToken,
             email: email,
-            designation: designation,
+            designation: admin.designation,
           });
         } else {
           res.status(401).json({
@@ -47,7 +47,7 @@ const adminLogin = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: "Internal Server Error ",
+      message: "Internal Server Error " + err.message,
       status: 0,
     });
   }

@@ -2,7 +2,7 @@ const db = require("../../../helpers/dbconnect");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const resetPassword = async (req, res) => {
+const registerNewUser = async (req, res) => {
   try {
     const { email, password, token } = req.body;
     if (!email || !password || !token) {
@@ -11,10 +11,10 @@ const resetPassword = async (req, res) => {
         status: 0,
       });
     } else {
-      await jwt.verify(token, process.env.ADMIN_FORGOT_PASSWORD_SECRET);
-      const searchAdmin = `SELECT * FROM admin_credentials WHERE email = ?`;
-      const [admin] = await db.queryAsync(searchAdmin, [email]);
-      if (!admin) {
+      await jwt.verify(token, process.env.STUDENT_SIGNUP_SECRET);
+      const searchStudent = `SELECT * FROM student_credentials WHERE email = ?`;
+      const student = db.queryAsync(searchStudent, [email]);
+      if (!student) {
         res.status(200).json({
           message: "Not found",
           status: 0,
@@ -24,7 +24,7 @@ const resetPassword = async (req, res) => {
           password,
           Number(process.env.SALT_ROUNDS)
         );
-        const sql = `UPDATE admin_credentials SET password = ? WHERE email = ?`;
+        const sql = `UPDATE student_credentials SET password = ? WHERE email = ?`;
         await db.queryAsync(sql, [hashedPassword, email]);
         res.status(200).json({
           message: "Password changed successfully",
@@ -40,4 +40,4 @@ const resetPassword = async (req, res) => {
   }
 };
 
-module.exports = resetPassword;
+module.exports = registerNewUser;
