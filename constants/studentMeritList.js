@@ -710,8 +710,6 @@ const studentMeritList = [
   {
     regNo: "185",
     generalRank: 255,
-    category: "st",
-    categoryRank: 1,
     preferences: ["1", "2", "3", "4","5","6","7","8","9"],
     currentSeatIndex: null,
     seatAllotmentCategory: null,
