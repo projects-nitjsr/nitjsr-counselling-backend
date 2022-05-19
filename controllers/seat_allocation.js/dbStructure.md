@@ -20,7 +20,6 @@ Structure of SeatMatrix
         clgId:"2",
         seatByCategory: [
             {
-<<<<<<< HEAD
               studentIdList: ["1","2","3"]
             },
             {
@@ -28,15 +27,6 @@ Structure of SeatMatrix
             },
             {
               studentIdList: ["4","5","6"]
-=======
-              studentIdQueue: {"1","2","3"}
-            },
-            {
-              studentIdQueue: {"4","5","6"}
-            },
-            {
-              studentIdQueue: {"4","5","6"}
->>>>>>> parent of 3be9bdc (Update College Api Rectified and Allocation Algorithm Added with Documentation)
             },
         ]
 
