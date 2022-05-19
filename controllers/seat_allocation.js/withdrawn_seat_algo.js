@@ -10,4 +10,4 @@ const withdrawn_seat = (studentId, meritList,seatMatrix) => {
 
 }
 
-module.exports = withdrawn_Seat;
+module.exports = withdrawn_seat;
