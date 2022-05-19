@@ -7,18 +7,28 @@ cloudinary.config({
 });
 const uploadPdf = async (data) => {
   try {
-    const uploadResponse = await cloudinary.uploader.upload(
-      data,
-      function (res, err) {
-        console.log(res, err);
-      }
-    );
-    console.log(uploadResponse);
+    if (
+      data.mimetype !== "application/pdf" &&
+      data.mimetype !== "application/x-pdf"
+    ) {
+      throw new Error("unsupported file format");
+    }
+    if (data.size > 3155728) {
+      throw new Error("file size must be <= 3MB");
+    }
+    //buffer to base 64
+    const base64Data =
+      "data:application/pdf;base64," + data.buffer.toString("base64");
+    const uploadResponse = await cloudinary.uploader.upload(base64Data, {
+      folder: `${process.env.CLOUDINARY_FOLDER}`,
+    });
+
     return uploadResponse.secure_url;
   } catch (err) {
     console.error(err);
   }
 };
+
 const deletePdf = (imageUrl) => {
   try {
     let fileName = imageUrl.split(`/${process.env.CLOUDINARY_NAME}/`)[1];
