@@ -20,13 +20,13 @@ Structure of SeatMatrix
         clgId:"2",
         seatByCategory: [
             {
-              studentIdList: {"1","2","3"}
+              studentIdList: ["1","2","3"]
             },
             {
-              studentIdList: {"4","5","6"}
+              studentIdList: ["4","5","6"]
             },
             {
-              studentIdList: {"4","5","6"}
+              studentIdList: ["4","5","6"]
             },
         ]
 
@@ -45,10 +45,11 @@ Structure of SeatMatrix
 
   // Structure of Merit List
   // [
-    // { studentId: "1", category: 0, rank: 1, seatFroze = true, chosenInstituteId="1" }, 
-    // { studentId: "2", category: 0, rank: 2, seatFroze = false, chosenInstituteId=NULL },
-    // { studentId: "3", category: 1, rank: 4, seatFroze = false, chosenInstituteId="2"},
-    // { studentId: "4", category: 2, rank: 3, seatFroze = true, chosenInstituteId="1" }
+    // { studentId: "1", category: 0, rank: 1, seatFroze = true, chosenInstituteId="1",
+     withDrawn =false }, 
+    // { studentId: "2", category: 0, rank: 2, seatFroze = false, chosenInstituteId=NULL,withDrawn = true },
+    // { studentId: "3", category: 1, rank: 4, seatFroze = false, chosenInstituteId="2", withDrawn =false},
+    // { studentId: "4", category: 2, rank: 3, seatFroze = true, chosenInstituteId="1", withDrawn =false }
   //]  
 
 

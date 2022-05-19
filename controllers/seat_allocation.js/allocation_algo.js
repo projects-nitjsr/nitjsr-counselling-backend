@@ -42,7 +42,7 @@ const allocate = (seatMatrix, waitingseatMatrix, meritList, preferenceList, coll
         }
      }
    
-     // TODO: function to call API to store the new seatMatrix and waitingseatMatrix
+     // TODO: function to call API to store the new seatMatrix 
  
 
 };
