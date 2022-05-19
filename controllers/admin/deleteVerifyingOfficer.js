@@ -1,4 +1,5 @@
 const db = require("../../helpers/dbconnect");
+const imageUploader = require("../../helpers/imageHandler");
 
 module.exports = async (req, res) => {
   const centerInchargeEmail =
@@ -23,6 +24,8 @@ module.exports = async (req, res) => {
 
     if (verifyingOfficer[0].college !== centerIncharge[0].college)
       throw new Error("No Auth");
+
+    await imageUploader.deleteImage(verifyingOfficer[0].profile_image_url);
 
     await db.queryAsync("DELETE FROM admin WHERE email = ? ", [
       VerifyingOfficerEmail,
