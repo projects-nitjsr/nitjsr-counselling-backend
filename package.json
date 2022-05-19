@@ -19,13 +19,17 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.3",
+    "form-data": "^4.0.0",
     "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.4",
+    "mustache": "^4.2.0",
     "mysql": "^2.18.1",
     "nodemailer": "^6.7.3",
     "response-time": "^2.3.2",
-    "sharp": "^0.30.4"
+    "sharp": "^0.30.4",
+    "handlebars": "^4.5.3",
+    "puppeteer": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

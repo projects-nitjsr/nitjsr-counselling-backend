@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
   const ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
 
   try {
-    console.log(image);
     const imageUrl = await imageUploader.uploadImage(image);
 
     const centerIncharge = await db.queryAsync(
