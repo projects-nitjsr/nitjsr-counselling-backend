@@ -1,9 +1,10 @@
 const studentMeritList = require("./../constants/studentMeritList");
 const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
+const fs = require("fs");
 
 studentMeritList.sort((a, b) => a.generalRank - b.generalRank);
 
-console.log(studentMeritList);
+//console.log(studentMeritList);
 
 const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   const finalAllocation = [];
@@ -12,7 +13,7 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
     let generalPreference = null;
     let categoryPreference = null;
     const student = studentMeritList[j];
-    console.log(student);
+    //console.log(student);
 
     for (let i = 0; i < student.preferences.length; ++i) {
       if (collegeSeatsWithId[student.preferences[i]].general_seats > 0) {
@@ -89,6 +90,16 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   }
 
   console.log(finalAllocation);
+
+  const jsonString = JSON.stringify(finalAllocation);
+
+  fs.writeFile("./finalAllocation.json", jsonString, (err) => {
+    if (err) {
+      console.log("Error writing file", err);
+    } else {
+      console.log("Successfully wrote file");
+    }
+  });
 
   return finalAllocation;
 };
