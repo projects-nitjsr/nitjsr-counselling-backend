@@ -1,6 +1,10 @@
 const studentMeritList = require("./../constants/studentMeritList");
 const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
 
+studentMeritList.sort((a, b) => a.generalRank - b.generalRank);
+
+console.log(studentMeritList);
+
 const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   const finalAllocation = [];
 
