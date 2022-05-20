@@ -1,7 +1,9 @@
 const db = require("../../helpers/dbconnect");
 
 module.exports = async (req, res) => {
-  const notice = req.body.notice || "hkgdckjhulifyrgfiryigoeruygtv";
+  const notice =
+    req.body.notice ||
+    "hkgdckjhulifyrgfiryigoeruygtvasdwasdajkHGsaiusgdiuaghshjidgaiuygdisgsaiugsdiuwgaisgdia";
   const user = req.body.user || "kxlscc";
   try {
     if (notice.length < 10) {
