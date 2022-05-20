@@ -2,6 +2,7 @@ module.exports = {
   auth: {
     adminLogin: require("./auth/admin/login"),
     studentLogin: require("./auth/student/login"),
+    studentLogout: require("./auth/student/logout"),
     studentVerify: require("./auth/student/verifyStudent"),
     studentSignUp: require("./auth/student/signUp"),
     adminForgotPassword: require("./auth/admin/forgotPassword"),
@@ -16,9 +17,11 @@ module.exports = {
     getStudentsByVerifingCollege: require("./student/getstudentsbyverifingcollege"),
     getStudentsByVeryfingOfficer: require("./student/getstudentsbyveryfingofficer"),
     updateStudentStatus: require("./student/updateStudentStatus"),
+    updateStudentImage: require("./student/updateStudentImage"),
     deleteStudent: require("./student/deleteStudent"),
   },
   college: {
+    createCollege: require("./college/createCollege"),
     getCollegeById: require("./college/getCollegeById"),
     getCollegeList: require("./college/getCollegeList"),
     updateCollegeById: require("./college/updateCollegeById"),
@@ -48,8 +51,8 @@ module.exports = {
     confirmDecision: require("./verify/confirmDecision"),
     denyDecision: require("./verify/denyDecision"),
   },
-  notice:{
-    getNotices:require("./notice/getNotices"),
-    createNotice:require("./notice/createNotice"),
-  }
+  notice: {
+    getNotices: require("./notice/getNotices"),
+    createNotice: require("./notice/createNotice"),
+  },
 };
