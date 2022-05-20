@@ -1,11 +1,9 @@
 const db = require("../../helpers/dbconnect");
-
+const imageUploader = require("../../helpers/imageHandler");
 module.exports = async (req, res) => {
   const email = req.body.email;
-
   const name = req.body.name;
   const phone = req.body.phone;
-
   const collegeEmail = req.body.collegeEmail;
 
   try {
