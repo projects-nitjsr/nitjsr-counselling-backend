@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
-const multerSingle = require("../../../middlewares/multerSingle");
+const multerSingle = require("../../middlewares/multerSingle");
 
 router.get(
   "/verifyingcollege",
@@ -21,7 +21,7 @@ router.get("/getstudentstatus/:regNo", controllers.student.getStudentStatus);
 router.put(
   "/updatestudentstatus/:regNo",
   controllers.student.updateStudentStatus
-  );
+);
 router.post(
   "/updatestudentimage/:regNo",
   multerSingle,
