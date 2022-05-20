@@ -124,6 +124,13 @@ CREATE TABLE logger (
 	user varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );
+CREATE TABLE notices (
+	id INT AUTO_INCREMENT NOT NULL,
+	timestamp DATETIME NOT NULL,
+	notice varchar(255) NOT NULL,
+	user varchar(255) NOT NULL,
+	PRIMARY KEY (id)
+);
 
 CREATE TABLE admin_session (
 	id INT AUTO_INCREMENT NOT NULL,

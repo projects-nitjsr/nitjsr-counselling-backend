@@ -278,6 +278,21 @@ VALUES
       (current_timestamp(),"1111:2222:3333:4444","thsfsfest log","admin@test.com"),
       (current_timestamp(),"1111:2222:3333:4444","thsfdgt log","admin@test.com"),
       (current_timestamp(),"1111:2222:3333:4444","this isfsdt log","admin@test.com");
+
+      INSERT INTO notices(timestamp,notice,user) 
+      VALUES
+      (current_timestamp(),"this is notice ","admin@test.com"),
+      (current_timestamp(),"this isw notice og","admin@test.com"),
+      (current_timestamp(),"this is notice og","admin@test.com"),
+      (current_timestamp(),"this is dwnotice og","admin@test.com"),
+      (current_timestamp(),"this is notice og","admin@test.com"),
+      (current_timestamp(),"this is notice og","admin@test.com"),
+      (current_timestamp(),"this is notice og","admin@test.com"),
+      (current_timestamp(),"this is notice log","admin@test.com"),
+      (current_timestamp(),"this is notice log","admin@test.com"),
+      (current_timestamp(),"thsfsfedst log","admin@test.com"),
+      (current_timestamp(),"thsfdgt log","admin@test.com"),
+      (current_timestamp(),"this isfnodtice" ,"admin@test.com");
 `;
 
   // const jsonData = [
