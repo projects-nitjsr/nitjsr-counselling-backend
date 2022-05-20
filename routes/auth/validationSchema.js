@@ -26,9 +26,22 @@ const studentLoginValidation = Joi.object({
     .required(),
 });
 
+const studentSignupValidation = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string()
+    .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
+    .required(),
+});
+
+const verifyStudentValidation = Joi.object({
+  regNo: Joi.string().required(),
+});
+
 module.exports = {
   adminLoginValidation,
   resetPasswordValidation,
   forgotPasswordValidation,
   studentLoginValidation,
+  studentSignupValidation,
+  verifyStudentValidation,
 };
