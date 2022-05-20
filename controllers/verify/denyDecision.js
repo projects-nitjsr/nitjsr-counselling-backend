@@ -1,8 +1,9 @@
 const db = require("../../helpers/dbconnect");
 
-const rejectStudent = async (req, res) => {
+const denyDecision = async (req, res) => {
   const regNo = req.body.regNo || "CCQ59RJX1003";
-  const centerInchargeEmail = req.body.email || "centerincharge.nitbho@nimcet.in";
+  const centerInchargeEmail =
+    req.body.email || "centerincharge.nitbho@nimcet.in";
 
   try {
     const studentStatus = await db.queryAsync(
@@ -17,7 +18,9 @@ const rejectStudent = async (req, res) => {
       [centerInchargeEmail]
     );
 
-    if (studentStatus[0].verifying_college !== centerInchargeCollege[0].college) {
+    if (
+      studentStatus[0].verifying_college !== centerInchargeCollege[0].college
+    ) {
       return res.status(401).json({ success: false, message: "not eligible" });
     }
 
@@ -32,4 +35,4 @@ const rejectStudent = async (req, res) => {
   }
 };
 
-module.exports = rejectStudent;
+module.exports = denyDecision;

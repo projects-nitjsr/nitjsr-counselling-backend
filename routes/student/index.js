@@ -3,11 +3,14 @@ const controllers = require("../../controllers");
 const {
   isAuthenticatedAdmin,
 } = require("../../middlewares/admin/isAuthenticatedAdmin");
+const validationSchema = require("./validationSchema");
+const validation = require("../../middlewares/validation");
 const multerSingle = require("../../middlewares/multerSingle");
 
 router.get(
   "/verifyingcollege",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["ci"]),
+  validation(validationSchema.getStudentsByVerifyingCollegeValidation),
   controllers.student.getStudentsByVerifingCollege
 );
 router.get(
@@ -50,8 +53,10 @@ router.get(
 router.put(
   "/updatestudentstatus/:regNo",
   isAuthenticatedAdmin,
-  controllers.student.updateStudentStatus
+  validation(validationSchema.getStudentsByVerifingOfficerValidation),
+  controllers.student.getStudentsByVeryfingOfficer
 );
+
 router.post(
   "/updatestudentimage/:regNo",
   multerSingle,

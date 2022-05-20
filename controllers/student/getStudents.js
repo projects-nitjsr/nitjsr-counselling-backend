@@ -1,8 +1,16 @@
 const db = require("../../helpers/dbconnect");
 
 const getStudents = async (req, res) => {
+  let page = parseInt(req.query.page) || 1;
+  page--;
+  const limit = parseInt(req.query.limit) || 30;
+  const offset = page * limit;
+
   try {
-    const students = await db.queryAsync("SELECT * FROM student", []);
+    const students = await db.queryAsync(
+      "SELECT * FROM student ORDER BY regno LIMIT = ? OFFSET = ?",
+      [limit, offset]
+    );
 
     if (students.length == 0) {
       throw new Error("No students found!");
