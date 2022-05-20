@@ -19,6 +19,7 @@ module.exports = {
     deleteStudent: require("./student/deleteStudent"),
   },
   college: {
+    createCollege: require("./college/createCollege"),
     getCollegeById: require("./college/getCollegeById"),
     getCollegeList: require("./college/getCollegeList"),
     updateCollegeById: require("./college/updateCollegeById"),
@@ -48,8 +49,8 @@ module.exports = {
     confirmDecision: require("./verify/confirmDecision"),
     denyDecision: require("./verify/denyDecision"),
   },
-  notice:{
-    getNotices:require("./notice/getNotices"),
-    createNotice:require("./notice/createNotice"),
-  }
+  notice: {
+    getNotices: require("./notice/getNotices"),
+    createNotice: require("./notice/createNotice"),
+  },
 };
