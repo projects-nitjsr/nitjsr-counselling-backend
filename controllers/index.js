@@ -2,6 +2,7 @@ module.exports = {
   auth: {
     adminLogin: require("./auth/admin/login"),
     studentLogin: require("./auth/student/login"),
+    studentLogout: require("./auth/student/logout"),
     studentVerify: require("./auth/student/verifyStudent"),
     studentSignUp: require("./auth/student/signUp"),
     adminForgotPassword: require("./auth/admin/forgotPassword"),
