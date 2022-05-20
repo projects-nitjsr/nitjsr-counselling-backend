@@ -1,6 +1,6 @@
 const db = require("../../helpers/dbconnect");
 
-const rejectStudent = async (req, res) => {
+const confirmDecision = async (req, res) => {
   const regNo = req.body.regNo || "CCQ59RJX1003";
   const centerInchargeEmail =
     req.body.email || "centerincharge.nitbho@nimcet.in";
@@ -18,18 +18,19 @@ const rejectStudent = async (req, res) => {
       [centerInchargeEmail]
     );
 
-    if (studentStatus[0].verifying_college !== centerInchargeCollege[0].college) {
+    if (
+      studentStatus[0].verifying_college !== centerInchargeCollege[0].college
+    ) {
       return res.status(401).json({ success: false, message: "not eligible" });
     }
-    
+
     let applicationStatus = "verified";
-    if(studentStatus[0].acceptedBy == null)
-    {
-        applicationStatus="rejected";
+    if (studentStatus[0].acceptedBy == null) {
+      applicationStatus = "rejected";
     }
     await db.queryAsync(
       "UPDATE student_status SET applicationStatus=?, confirmationPending = ?,failureDesc = NULL WHERE regno = ? ",
-      [applicationStatus,false, regNo]
+      [applicationStatus, false, regNo]
     );
 
     res.status(200).json({ success: true, message: "confirm succesfully" });
@@ -38,4 +39,4 @@ const rejectStudent = async (req, res) => {
   }
 };
 
-module.exports = rejectStudent;
+module.exports = confirmDecision;
