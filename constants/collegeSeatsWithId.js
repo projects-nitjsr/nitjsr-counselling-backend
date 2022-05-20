@@ -31,6 +31,46 @@ const collegeSeatsWithId = {
     ews_seats: 1,
     pwd_general_seats: 0,
   },
+  5: {
+    general_seats: 10,
+    obc_seats: 5,
+    sc_seats: 3,
+    st_seats: 2,
+    ews_seats: 1,
+    pwd_general_seats: 0,
+  },
+  6: {
+    general_seats: 10,
+    obc_seats: 5,
+    sc_seats: 3,
+    st_seats: 2,
+    ews_seats: 1,
+    pwd_general_seats: 0,
+  },
+  7: {
+    general_seats: 10,
+    obc_seats: 5,
+    sc_seats: 3,
+    st_seats: 2,
+    ews_seats: 1,
+    pwd_general_seats: 0,
+  },
+  8: {
+    general_seats: 10,
+    obc_seats: 5,
+    sc_seats: 3,
+    st_seats: 2,
+    ews_seats: 1,
+    pwd_general_seats: 0,
+  },
+  9: {
+    general_seats: 10,
+    obc_seats: 5,
+    sc_seats: 3,
+    st_seats: 2,
+    ews_seats: 1,
+    pwd_general_seats: 0,
+  },
 };
 
 module.exports = collegeSeatsWithId;

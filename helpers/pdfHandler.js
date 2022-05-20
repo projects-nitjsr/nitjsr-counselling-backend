@@ -29,18 +29,12 @@ const uploadPdf = async (data) => {
   }
 };
 
-const deletePdf = (imageUrl) => {
+const deletePdf = (pdfUrl) => {
   try {
-    let fileName = imageUrl.split(`/${process.env.CLOUDINARY_NAME}/`)[1];
-    let publicId =
-      `${process.env.CLOUDINARY_NAME}/` +
-      fileName.substr(0, fileName.length - 4);
-    cloudinary.uploader.destroy(publicId, function (error, result) {
-      if (result) {
-        console.log("deleted");
-      }
-      error && console.log(error);
-    });
+    let fileName = pdfUrl.split(`/${process.env.CLOUDINARY_FOLDER}/`)[1];
+    let publicId = `${process.env.CLOUDINARY_FOLDER}/` + fileName.split(".")[0];
+    const result = await cloudinary.uploader.destroy(publicId);
+    console.log(`${publicId}`, result);
   } catch (err) {
     console.error(err);
   }
