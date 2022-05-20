@@ -12,7 +12,7 @@ const resetPassword = async (req, res) => {
       });
     } else {
       await jwt.verify(token, process.env.STUDENT_FORGOT_PASSWORD_SECRET);
-      const searchStudent = `SELECT * FROM student_credentials WHERE email = ?`;
+      const searchStudent = `SELECT * FROM student WHERE email = ?`;
       const student = db.queryAsync(searchStudent, [email]);
       if (!student) {
         res.status(200).json({
@@ -24,8 +24,8 @@ const resetPassword = async (req, res) => {
           password,
           Number(process.env.SALT_ROUNDS)
         );
-        const sql = `UPDATE student_credentials SET password = ? WHERE email = ?`;
-        await db.queryAsync(sql, [hashedPassword, email]);
+        const sql = `UPDATE student_credentials SET password = ? WHERE regno = ?`;
+        await db.queryAsync(sql, [hashedPassword, student.regno]);
         res.status(200).json({
           message: "Password changed successfully",
           status: 1,
