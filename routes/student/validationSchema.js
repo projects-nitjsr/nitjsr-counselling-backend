@@ -8,18 +8,19 @@ const getStudentsByVerifingOfficerValidation = Joi.object({
   email: Joi.string().email().required(),
 });
 
-const updateStudentStatusValidation = Joi.object({
-  applicationStatus: Joi.string().required(),
-  failureDesc: Joi.string(),
-  acceptedBy: Joi.string(),
-  rejectedBy: Joi.string(),
-  confirmationPending: Joi.string(),
-  verifyingOfficer: Joi.string().required(),
-  verifyingCollege: Joi.string().required(),
+const updateStudentVerifyingCollegeValidation = Joi.object({
+  regNo: Joi.string().required(),
+  verifyingCollegeWithRegNo: Joi.array().required,
+});
+
+const updateStudentVerifyingOfficerValidation = Joi.object({
+  regNo: Joi.string().required(),
+  verifyingOfficer: Joi.string().email().required(),
 });
 
 module.exports = {
   getStudentsByVerifyingCollegeValidation,
   getStudentsByVerifingOfficerValidation,
-  updateStudentStatusValidation,
+  updateStudentVerifyingCollegeValidation,
+  updateStudentVerifyingOfficerValidation,
 };
