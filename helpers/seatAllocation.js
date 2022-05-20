@@ -1,5 +1,23 @@
 const studentMeritList = require("./../constants/studentMeritList");
 const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
+// //auto generated data
+// const fs = require("fs");
+// let dummyData;
+// fs.readFile(
+//   "randomStudentMeritList.json",
+//   "utf8",
+//   function readFileCallback(err, data) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       dummyData = JSON.parse(data);
+//       console.log(1, dummyData);
+//     }
+//   }
+// );
+// console.log(2, dummyData);
+// const studentMeritList = dummyData;
+// //---------------------------------
 const fs = require("fs");
 
 studentMeritList.sort((a, b) => a.generalRank - b.generalRank);

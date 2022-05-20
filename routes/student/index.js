@@ -2,6 +2,7 @@ const router = require("express").Router();
 const controllers = require("../../controllers");
 const validationSchema = require("./validationSchema");
 const validation = require("../../middlewares/validation");
+const multerSingle = require("../../middlewares/multerSingle");
 
 router.get(
   "/verifyingcollege",
@@ -24,6 +25,11 @@ router.put(
   "/updatestudentstatus/:regNo",
   validation(validationSchema.updateStudentStatusValidation),
   controllers.student.updateStudentStatus
+);
+router.post(
+  "/updatestudentimage/:regNo",
+  multerSingle,
+  controllers.student.updateStudentImage
 );
 router.delete("/deletestudent/:regNo", controllers.student.deleteStudent);
 
