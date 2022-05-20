@@ -2,7 +2,7 @@ const Joi = require("@hapi/joi");
 
 const createCollegeValidation = Joi.object({
   name: Joi.string().required(),
-  general_seat: Joi.string().required(),
+  general_seats: Joi.string().required(),
   obc_seats: Joi.string().required(),
   sc_seats: Joi.string().required(),
   st_seats: Joi.string().required(),

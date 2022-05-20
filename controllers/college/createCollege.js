@@ -14,11 +14,11 @@ const createCollege = async (req, res) => {
       profile_image_url
     } = req.body;
 
-    if (!(name&&general_seats&&obc_seats&&sc_seats&&st_seats&&pwd_seats&&ews_seats&&profile_image_url)) {
-        throw new Error("Required Information is Missing");
-      }
+    // if (!(name&&general_seats&&obc_seats&&sc_seats&&st_seats&&pwd_seats&&ews_seats&&profile_image_url)) {
+    //     throw new Error("Required Information is Missing");
+    //   }
 const sqlQuery =
-    "INSERT INTO colleges(name,general_seats,obc_seats,sc_seats,st_seats,pwd_seats,ews_seats,profile_image_url) VALUES (?,?,?,?,?,?,?,?)";
+    "INSERT INTO colleges(name,general_seats,obc_seats,sc_seats,st_seats,pwd_seats,ews_seats,profile_image_url) VALUES (?,?,?,?,?,?,?,\"xyz\")";
 
   await db.queryAsync(sqlQuery, [
     name,
@@ -38,4 +38,4 @@ const sqlQuery =
   }
 };
 
-module.exports = updateCollegeById;
+module.exports = createCollege;

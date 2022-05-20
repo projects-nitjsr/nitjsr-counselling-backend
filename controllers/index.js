@@ -19,7 +19,7 @@ module.exports = {
     deleteStudent: require("./student/deleteStudent"),
   },
   college: {
-    createCollege: require("./student/createCollege"),
+    createCollege: require("./college/createCollege"),
     getCollegeById: require("./college/getCollegeById"),
     getCollegeList: require("./college/getCollegeList"),
     updateCollegeById: require("./college/updateCollegeById"),
