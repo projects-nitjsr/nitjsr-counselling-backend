@@ -17,6 +17,7 @@ module.exports = {
     getStudentsByVerifingCollege: require("./student/getstudentsbyverifingcollege"),
     getStudentsByVeryfingOfficer: require("./student/getstudentsbyveryfingofficer"),
     updateStudentStatus: require("./student/updateStudentStatus"),
+    updateStudentImage: require("./student/updateStudentImage"),
     deleteStudent: require("./student/deleteStudent"),
   },
   college: {
