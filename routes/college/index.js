@@ -1,19 +1,19 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
-const validation = require("../../../middlewares/validation");
+const validation = require("../../middlewares/validation");
 const validationSchema = require("./validationSchema");
 
 //please add route for creating college
 router.post(
-  "./createCollege",
+  "/create",
   validation(validationSchema.createCollegeValidation),
   controllers.college.createCollege
 );
-router.get("/getcolleges", controllers.college.getCollegeList);
-router.get("/getcollege/:id", controllers.college.getCollegeById);
-router.delete("/deletecollege/:id", controllers.college.deleteCollegeById);
+router.get("/get", controllers.college.getCollegeList);
+router.get("/get/:id", controllers.college.getCollegeById);
+router.delete("/delete/:id", controllers.college.deleteCollegeById);
 router.put(
-  "/updatecollege/:id",
+  "/update/:id",
   validation(validationSchema.updateCollegeValidation),
   controllers.college.updateCollegeById
 );
