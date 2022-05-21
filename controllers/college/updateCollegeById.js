@@ -22,7 +22,11 @@ const updateCollegeById = async (req, res) => {
       ews_seats,
     } = req.body;
     const image = req.file;
-    const imageUrl = await imageUploader.uploadImage(image);
+    let newImageUrl;
+    if (image) {
+    await imageUploader.deleteImage(college[0].profile_image_url);
+    newImageUrl = await imageUploader.uploadImage(image);
+    }
     const sqlQuery =
     "UPDATE colleges SET name = ?, general_seats = ?, obc_seats = ?, sc_seats = ?, st_seats = ?,pwd_seats = ?, ews_seats = ?, profile_image_url = ? WHERE id = ?";
 
@@ -34,7 +38,7 @@ const updateCollegeById = async (req, res) => {
     st_seats || college[0].st_seats,
     pwd_seats || college[0].pwd_seats,
     ews_seats || college[0].ews_seats,
-    imageUrl || college[0].profile_image_url,
+    newImageUrl || college[0].profile_image_url,
     clgId
   ]);
    
