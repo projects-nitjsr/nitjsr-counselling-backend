@@ -62,7 +62,6 @@ router.put(
   validation(validationSchema.updateStudentVerifyingOfficerValidation),
   controllers.student.updateStudentVerifyingOfficer
 );
-
 router.post(
   "/updatestudentimage/:regNo",
   multerSingle,
@@ -75,3 +74,4 @@ router.delete(
 );
 
 module.exports = router;
+
