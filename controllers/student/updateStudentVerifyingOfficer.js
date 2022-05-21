@@ -1,7 +1,7 @@
 const db = require("../../helpers/dbconnect");
 
 const updateStudentVerifyingOfficer = async (req, res) => {
-  const centerInchargeEmail = req.user.email;
+  const centerInchargeEmail = req.user.email || "chairman@nimcet.in";
   const { verifyingOfficer: verifyingOfficerEmail, regNo } = req.body;
 
   try {
