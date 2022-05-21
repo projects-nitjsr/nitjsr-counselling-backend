@@ -22,12 +22,12 @@ router.put("/deny", controllers.verify.denyDecision);
 router.get("/:regNo", controllers.student.getStudentByRegNo);
 router.get("/getstudentstatus/:regNo", controllers.student.getStudentStatus);
 router.put(
-  "/updatestudentverifyingcollege/:regNo",
+  "/updatestudentverifyingcollege",
   validation(validationSchema.updateStudentVerifyingCollegeValidation),
   controllers.student.updateStudentVerifyingCollege
 );
 router.put(
-  "/updatestudentverifyingofficer/:regNo",
+  "/updatestudentverifyingofficer",
   validation(validationSchema.updateStudentVerifyingOfficerValidation),
   controllers.student.updateStudentVerifyingOfficer
 );
