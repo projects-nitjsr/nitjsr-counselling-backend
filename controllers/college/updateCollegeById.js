@@ -1,5 +1,5 @@
 const db = require("../../helpers/dbconnect");
-
+const imageUploader = require("../../helpers/imageHandler");
 const updateCollegeById = async (req, res) => {
   const clgId = req.params.id;
 
@@ -20,10 +20,13 @@ const updateCollegeById = async (req, res) => {
       st_seats,
       pwd_seats,
       ews_seats,
-      profile_image_url
     } = req.body;
-
-
+    const image = req.file;
+    let newImageUrl;
+    if (image) {
+    await imageUploader.deleteImage(college[0].profile_image_url);
+    newImageUrl = await imageUploader.uploadImage(image);
+    }
     const sqlQuery =
     "UPDATE colleges SET name = ?, general_seats = ?, obc_seats = ?, sc_seats = ?, st_seats = ?,pwd_seats = ?, ews_seats = ?, profile_image_url = ? WHERE id = ?";
 
@@ -35,7 +38,7 @@ const updateCollegeById = async (req, res) => {
     st_seats || college[0].st_seats,
     pwd_seats || college[0].pwd_seats,
     ews_seats || college[0].ews_seats,
-    profile_image_url || college[0].profile_image_url,
+    newImageUrl || college[0].profile_image_url,
     clgId
   ]);
    

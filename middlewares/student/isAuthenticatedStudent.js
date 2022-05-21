@@ -6,16 +6,24 @@ module.exports.isAuthenticatedStudent = (req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1];
     if (token == null) {
       return res.status(200).json({
-        message: "Not Authorized Student",
+        message: "Not Authenticated",
         status: 0,
       });
     } else {
-      jwt.verify(token, process.env.STUDENT_SECRET);
-      next();
+      const { regno, role } = jwt.verify(token, process.env.STUDENT_SECRET);
+      req.user = { regno: regno, role: student };
+      if (role == "student") {
+        next();
+      } else {
+        res.status(401).json({
+          message: "Not Authorised",
+          status: 0,
+        });
+      }
     }
   } catch (err) {
     res.status(200).json({
-      message: "Not Authenticated Student",
+      message: "Not Authenticated",
       status: 0,
     });
   }
