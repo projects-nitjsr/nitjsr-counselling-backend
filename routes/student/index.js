@@ -51,10 +51,16 @@ router.get(
   controllers.student.getStudentStatus
 );
 router.put(
-  "/updatestudentstatus/:regNo",
-  isAuthenticatedAdmin,
-  validation(validationSchema.getStudentsByVerifingOfficerValidation),
-  controllers.student.getStudentsByVeryfingOfficer
+  "/updatestudentverifyingcollege/:regNo",
+  (req, res, next) => isAuthenticatedAdmin(req, res, next, ["c", "s"]),
+  validation(validationSchema.updateStudentVerifyingCollegeValidation),
+  controllers.student.updateStudentVerifyingCollege
+);
+router.put(
+  "/updatestudentverifyingofficer/:regNo",
+  (req, res, next) => isAuthenticatedAdmin(req, res, next, ["ci"]),
+  validation(validationSchema.updateStudentVerifyingOfficerValidation),
+  controllers.student.updateStudentVerifyingOfficer
 );
 
 router.post(

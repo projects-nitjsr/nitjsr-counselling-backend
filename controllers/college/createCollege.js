@@ -1,5 +1,5 @@
 const db = require("../../helpers/dbconnect");
-
+const imageUploader = require("../../helpers/imageHandler");
 const createCollege = async (req, res) => {
   
   try {
@@ -10,15 +10,16 @@ const createCollege = async (req, res) => {
       sc_seats,
       st_seats,
       pwd_seats,
-      ews_seats,
-      profile_image_url
+      ews_seats
     } = req.body;
-
+    const image = req.file;
     // if (!(name&&general_seats&&obc_seats&&sc_seats&&st_seats&&pwd_seats&&ews_seats&&profile_image_url)) {
     //     throw new Error("Required Information is Missing");
     //   }
-const sqlQuery =
-    "INSERT INTO colleges(name,general_seats,obc_seats,sc_seats,st_seats,pwd_seats,ews_seats,profile_image_url) VALUES (?,?,?,?,?,?,?,\"xyz\")";
+
+    const imageUrl = await imageUploader.uploadImage(image);
+    const sqlQuery =
+    "INSERT INTO colleges(name,general_seats,obc_seats,sc_seats,st_seats,pwd_seats,ews_seats,profile_image_url) VALUES (?,?,?,?,?,?,?,?)";
 
   await db.queryAsync(sqlQuery, [
     name,
@@ -28,7 +29,7 @@ const sqlQuery =
     st_seats,
     pwd_seats,
     ews_seats,
-    profile_image_url ,
+    imageUrl,
   ]);
    
 
