@@ -5,14 +5,12 @@ const q = require("q");
 const updateStudentVerifyingCollege = async (req, res) => {
   const { verifyingCollegeWithRegNo } = req.body;
   const verifyingArray = [];
-  const regNos = [];
 
   for (let i = 0; i < verifyingCollegeWithRegNo.length; ++i) {
     verifyingArray.push([
       verifyingCollegeWithRegNo[i].collegeId,
       verifyingCollegeWithRegNo[i].regNo,
     ]);
-    regNos.push(verifyingCollegeWithRegNo[i].regNo);
   }
 
   console.log(verifyingArray);
