@@ -9,26 +9,26 @@ const verifyNewUser = async (req, res) => {
         status: 0,
       });
     } else {
-      const searchStudent = `SELECT * FROM student_credentials WHERE regno = ?`;
-      const student = db.queryAsync(searchStudent, [regno]);
-      if (!student) {
+      const searchStudent = `SELECT * FROM student WHERE regno = ?`;
+      const student = await db.queryAsync(searchStudent, [regno]);
+      if (student.length == 0) {
         res.status(200).json({
-          message: "Not found",
+          message: "Student not found",
           status: 0,
         });
       } else {
         const token = jwt.sign(
           {
-            email: student.email,
+            regno: student[0].regno,
           },
           process.env.STUDENT_SIGNUP_SECRET,
-          { expiresIn: "1" }
+          { expiresIn: "1h" }
         );
 
         //send email
         //url = process.env.FRONTEND_URL/reset?t=token
         res.status(200).json({
-          message: `Email sent to ${email} with an url to register`,
+          message: `Email sent to ${student[0].email} with an url to register`,
           status: 1,
           token: token,
         });
@@ -36,7 +36,7 @@ const verifyNewUser = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: "Internal Server Error" + err.message,
+      message: "Internal Server Error " + err.message,
       status: 0,
     });
   }
