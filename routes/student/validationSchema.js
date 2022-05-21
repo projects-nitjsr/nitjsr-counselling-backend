@@ -9,8 +9,7 @@ const getStudentsByVerifingOfficerValidation = Joi.object({
 });
 
 const updateStudentVerifyingCollegeValidation = Joi.object({
-  regNo: Joi.string().required(),
-  verifyingCollegeWithRegNo: Joi.array().required,
+  verifyingCollegeWithRegNo: Joi.array().required(),
 });
 
 const updateStudentVerifyingOfficerValidation = Joi.object({

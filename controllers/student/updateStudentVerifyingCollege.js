@@ -11,10 +11,12 @@ const updateStudentVerifyingCollege = async (req, res) => {
     ]);
   }
 
+  console.log(verifyingArray);
+
   try {
     await db.queryAsync(
       "UPDATE student_status SET verifying_college = ? WHERE regNo = ?",
-      verifyingArray
+      ...verifyingArray
     );
 
     res.status(200).json({ success: true, message: "Update successful" });

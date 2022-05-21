@@ -1,12 +1,12 @@
 const db = require("../../helpers/dbconnect");
 
 const updateStudentVerifyingOfficer = async (req, res) => {
-  const centerInchargeEmail = req.user.email || "chairman@nimcet.in";
+  const centerInchargeEmail = "centerincharge.nitrai@nimcet.in";
   const { verifyingOfficer: verifyingOfficerEmail, regNo } = req.body;
 
   try {
     const studentStatus = await db.queryAsync(
-      "SELECT name FROM student_status WHERE regno = ?",
+      "SELECT regno FROM student_status WHERE regno = ?",
       [regNo]
     );
 
@@ -30,8 +30,15 @@ const updateStudentVerifyingOfficer = async (req, res) => {
         .json({ success: false, message: "Verifying officer does not exist" });
     }
 
-    if (verifyingOfficerCollege !== centerInchargeCollege) {
-      throw new Error("Unauthorized access");
+    console.log(
+      centerInchargeCollege[0].college,
+      verifyingOfficerCollege[0].college
+    );
+
+    if (
+      verifyingOfficerCollege[0].college !== centerInchargeCollege[0].college
+    ) {
+      throw new Error("Colleges do not match");
     }
 
     await db.queryAsync(
