@@ -8,6 +8,9 @@ const deleteCollegeById = async (req, res) => {
       "SELECT * FROM colleges WHERE id = ?",
       [clgId]
     );
+    if (college.length == 0)
+      throw new Error("College doesn't exist");
+    
     await db.queryAsync("DELETE FROM colleges WHERE id = ?", [clgId]);
     await imageUploader.deleteImage(college[0].profile_image_url);
     res
