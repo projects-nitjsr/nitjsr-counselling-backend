@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const fun = () => {
   const x = [];
   const categories = [
@@ -58,6 +60,11 @@ const fun = () => {
       x.push({ ...data, regNo, generalRank, preferences: [...preferences] });
     }
   }
-  return x;
+  // return x;
+  const json = JSON.stringify(x);
+  fs.writeFile("randomStudentMeritList.json", json, "utf8", () =>
+    console.log("Random Data file created successfully")
+  );
 };
-module.exports = fun();
+// module.exports = fun();
+fun();
