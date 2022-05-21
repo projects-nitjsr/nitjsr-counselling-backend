@@ -9,8 +9,8 @@ router.post(
   validation(validationSchema.createCollegeValidation),
   controllers.college.createCollege
 );
-router.get("/get", controllers.college.getCollegeList);
-router.get("/get/:id", controllers.college.getCollegeById);
+router.get("/", controllers.college.getCollegeList);
+router.get("/:id", controllers.college.getCollegeById);
 router.delete("/delete/:id", controllers.college.deleteCollegeById);
 router.put(
   "/update/:id",
