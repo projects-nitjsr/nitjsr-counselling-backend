@@ -27,9 +27,9 @@ router.put(
   controllers.student.updateStudentStatus
 );
 router.post(
-  "/updatestudentimage/:regNo",
+  "/updatestudentdata",
   multerSingle,
-  controllers.student.updateStudentImage
+  controllers.student.updateStudentData
 );
 router.delete("/deletestudent/:regNo", controllers.student.deleteStudent);
 
