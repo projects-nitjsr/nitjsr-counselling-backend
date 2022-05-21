@@ -13,10 +13,10 @@ const resetPassword = async (req, res) => {
     } else {
       await jwt.verify(token, process.env.STUDENT_FORGOT_PASSWORD_SECRET);
       const searchStudent = `SELECT * FROM student WHERE email = ?`;
-      const student = db.queryAsync(searchStudent, [email]);
-      if (!student) {
+      const student = await db.queryAsync(searchStudent, [email]);
+      if (student.length == 0) {
         res.status(200).json({
-          message: "Not found",
+          message: "Student not found",
           status: 0,
         });
       } else {
@@ -24,8 +24,9 @@ const resetPassword = async (req, res) => {
           password,
           Number(process.env.SALT_ROUNDS)
         );
+        console.log(hashedPassword);
         const sql = `UPDATE student_credentials SET password = ? WHERE regno = ?`;
-        await db.queryAsync(sql, [hashedPassword, student.regno]);
+        await db.queryAsync(sql, [hashedPassword, student[0].regno]);
         res.status(200).json({
           message: "Password changed successfully",
           status: 1,
