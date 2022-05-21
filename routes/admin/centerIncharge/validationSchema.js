@@ -6,6 +6,9 @@ const createCenterInchargeValidation = Joi.object({
   phone: Joi.string().required(),
   college: Joi.string().required(),
   collegeEmail: Joi.string().required().email(),
+  password: Joi.string()
+    .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
+    .required(),
 });
 
 const deleteCenterInchargeValidation = Joi.object({
