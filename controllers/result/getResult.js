@@ -7,7 +7,7 @@ const getResult = async (req, res) => {
   const offset = page * limit;
   try {
     const result = await db.queryAsync(
-      "SELECT * FROM result ORDER BY regno LIMIT = ? OFFSET = ?",
+      "SELECT * FROM result ORDER BY regno LIMIT ? OFFSET ?",
       [limit, offset]
     );
 
