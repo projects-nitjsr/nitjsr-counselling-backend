@@ -51,13 +51,13 @@ router.get(
   controllers.student.getStudentStatus
 );
 router.put(
-  "/updatestudentverifyingcollege/:regNo",
+  "/updatestudentverifyingcollege",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["c", "s"]),
   validation(validationSchema.updateStudentVerifyingCollegeValidation),
   controllers.student.updateStudentVerifyingCollege
 );
 router.put(
-  "/updatestudentverifyingofficer/:regNo",
+  "/updatestudentverifyingofficer",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["ci"]),
   validation(validationSchema.updateStudentVerifyingOfficerValidation),
   controllers.student.updateStudentVerifyingOfficer
@@ -74,4 +74,3 @@ router.delete(
 );
 
 module.exports = router;
-
