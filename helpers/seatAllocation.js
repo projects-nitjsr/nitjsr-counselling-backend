@@ -1,31 +1,20 @@
-const studentMeritList = require("./../constants/studentMeritList");
-const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
-// //auto generated data
-// const fs = require("fs");
-// let dummyData;
-// fs.readFile(
-//   "randomStudentMeritList.json",
-//   "utf8",
-//   function readFileCallback(err, data) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       dummyData = JSON.parse(data);
-//       console.log(1, dummyData);
-//     }
-//   }
-// );
-// console.log(2, dummyData);
-// const studentMeritList = dummyData;
-// //---------------------------------
-const fs = require("fs");
+const calcSeats = (collegeSeatsWithId) => {
+  let x = 0;
+  for (const c in collegeSeatsWithId) {
+    for (const d in collegeSeatsWithId[c]) {
+      x += collegeSeatsWithId[c][d];
+    }
+  }
+  return x;
+};
 
-studentMeritList.sort((a, b) => a.generalRank - b.generalRank);
-
-//console.log(studentMeritList);
-
-const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
+module.exports = (studentMeritList, collegeSeatsWithId) => {
   const finalAllocation = [];
+  const remainingStudents = [];
+
+  let totalSeats = calcSeats(collegeSeatsWithId);
+
+  studentMeritList.sort((a, b) => a.generalRank - b.generalRank);
 
   for (let j = 0; j < studentMeritList.length; ++j) {
     let generalPreference = null;
@@ -104,22 +93,23 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
           });
         }
       }
+    } else {
+      remainingStudents.push(student);
     }
   }
 
-  console.log(finalAllocation);
-
-  const jsonString = JSON.stringify(finalAllocation);
-
-  fs.writeFile("./finalAllocation.json", jsonString, (err) => {
-    if (err) {
-      console.log("Error writing file", err);
-    } else {
-      console.log("Successfully wrote file");
-    }
-  });
-
-  return finalAllocation;
+  let remainingSeats = calcSeats(collegeSeatsWithId);
+  const summary = `
+  Total No of Colleges Seats= ${totalSeats},
+  Total no of students considered = ${studentMeritList.length},
+  Total no of seats allocated = ${finalAllocation.length},
+  Total Remaining College Seats = ${remainingSeats},
+  `;
+  console.log(summary);
+  return {
+    finalAllocation,
+    remainingStudents,
+    remainingCollegeSeats: collegeSeatsWithId,
+    noOfSeatsRemaining: remainingSeats,
+  };
 };
-
-seatAllocation(studentMeritList, collegeSeatsWithId);
