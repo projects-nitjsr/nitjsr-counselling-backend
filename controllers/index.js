@@ -1,5 +1,6 @@
 module.exports = {
   auth: {
+    adminLogout: require("./auth/admin/logout"),
     adminLogin: require("./auth/admin/login"),
     studentLogin: require("./auth/student/login"),
     studentLogout: require("./auth/student/logout"),
