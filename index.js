@@ -11,9 +11,6 @@ const helmet = require("helmet");
 const responseTime = require("response-time");
 
 const compression = require("compression");
-const {
-  isAuthenticatedAdmin,
-} = require("./middlewares/admin/isAuthenticatedAdmin");
 
 //gzip compression
 app.use(compression());
@@ -44,7 +41,7 @@ app.use(express.json());
 app.use("/", routes);
 
 // Home route
-app.get("/", isAuthenticatedAdmin, (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     message: "Welcome, This is App's Backend",
   });
