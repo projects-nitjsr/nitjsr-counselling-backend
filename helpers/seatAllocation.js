@@ -1,14 +1,19 @@
+const studentMeritList = require("./../constants/studentMeritList");
+const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
+
 const calcSeats = (collegeSeatsWithId) => {
   let x = 0;
+
   for (const c in collegeSeatsWithId) {
     for (const d in collegeSeatsWithId[c]) {
       x += collegeSeatsWithId[c][d];
     }
   }
+
   return x;
 };
 
-module.exports = (studentMeritList, collegeSeatsWithId) => {
+const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   const finalAllocation = [];
   const remainingStudents = [];
 
@@ -61,6 +66,7 @@ module.exports = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: "general",
           });
+          student.seatAllotmentCategory = "general";
         } else {
           --collegeSeatsWithId[student.preferences[preference]][
             `${student.category}_seats`
@@ -70,6 +76,7 @@ module.exports = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: student.category,
           });
+          student.seatAllotmentCategory = student.category;
         }
       } else {
         ++collegeSeatsWithId[student.preferences[student.currentSeatIndex]][
@@ -82,6 +89,7 @@ module.exports = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: "general",
           });
+          student.seatAllotmentCategory = "general";
         } else {
           --collegeSeatsWithId[student.preferences[preference]][
             `${student.category}_seats`
@@ -91,8 +99,10 @@ module.exports = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: student.category,
           });
+          student.seatAllotmentCategory = student.category;
         }
       }
+      student.currentSeatIndex = preference;
     } else {
       remainingStudents.push(student);
     }
@@ -105,7 +115,9 @@ module.exports = (studentMeritList, collegeSeatsWithId) => {
   Total no of seats allocated = ${finalAllocation.length},
   Total Remaining College Seats = ${remainingSeats},
   `;
-  console.log(summary);
+  //console.log(summary);
+  console.log(studentMeritList);
+
   return {
     finalAllocation,
     remainingStudents,
@@ -113,3 +125,7 @@ module.exports = (studentMeritList, collegeSeatsWithId) => {
     noOfSeatsRemaining: remainingSeats,
   };
 };
+
+module.exports = seatAllocation;
+
+seatAllocation(studentMeritList, collegeSeatsWithId);
