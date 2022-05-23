@@ -293,6 +293,17 @@ VALUES
       (current_timestamp(),"thsfsfedst log","admin@test.com"),
       (current_timestamp(),"thsfdgt log","admin@test.com"),
       (current_timestamp(),"this isfnodtice" ,"admin@test.com");
+
+      INSERT INTO result (regno,college,category,status)
+      VALUES
+      ("CCQ59RJX1002","1000002","sc","rejected"),
+      ("CCQ59RJX1003","1000003","pwd","pending"),
+      ("CCQ59RJX1004","1000004",null,"pending"),
+      ("CCQ59RJX1005","1000005","obc","accepted"),
+      ("CCQ59RJX1006","1000006","ews","accepted"),
+      ("CCQ59RJX1007","1000007","st","rejected"),
+      ("CCQ59RJX1008","1000008","pwd","rejected"),
+      ("CCQ59RJX1009","1000009",null,"rejected");
 `;
 
   // const jsonData = [

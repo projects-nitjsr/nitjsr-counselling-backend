@@ -4,19 +4,19 @@ const bcrypt = require("bcryptjs");
 
 const registerNewUser = async (req, res) => {
   try {
-    const { email, password, token } = req.body;
-    if (!email || !password || !token) {
+    const { regno, password, token } = req.body;
+    if (!regno || !password || !token) {
       res.status(400).json({
         message: "Missing parameters",
         status: 0,
       });
     } else {
       await jwt.verify(token, process.env.STUDENT_SIGNUP_SECRET);
-      const searchStudent = `SELECT * FROM student WHERE email = ?`;
-      const student = db.queryAsync(searchStudent, [email]);
-      if (!student) {
+      const searchStudent = `SELECT * FROM student WHERE regno = ?`;
+      const student = await db.queryAsync(searchStudent, [regno]);
+      if (student.length == 0) {
         res.status(200).json({
-          message: "Not found",
+          message: "Student Not found",
           status: 0,
         });
       } else {
@@ -24,10 +24,13 @@ const registerNewUser = async (req, res) => {
           password,
           Number(process.env.SALT_ROUNDS)
         );
-        const sql = `UPDATE student_credentials SET password = ? WHERE regno = ?`;
-        await db.queryAsync(sql, [hashedPassword, student.regno]);
+        const sql = `INSERT INTO student_credentials (regno,password,token) 
+        VALUES 
+        (?,?,null)`;
+        await db.queryAsync(sql, [student[0].regno, hashedPassword]);
+        console.log(res);
         res.status(200).json({
-          message: "Password changed successfully",
+          message: "Student Signed up successfully",
           status: 1,
         });
       }

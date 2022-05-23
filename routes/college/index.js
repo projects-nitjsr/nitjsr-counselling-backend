@@ -13,8 +13,8 @@ router.post(
   validation(validationSchema.createCollegeValidation),
   controllers.college.createCollege
 );
-router.get("/get", controllers.college.getCollegeList);
-router.get("/get/:id", controllers.college.getCollegeById);
+router.get("/", controllers.college.getCollegeList);
+router.get("/:id", controllers.college.getCollegeById);
 router.delete(
   "/delete/:id",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["c", "s"]),

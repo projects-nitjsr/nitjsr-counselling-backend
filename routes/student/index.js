@@ -63,9 +63,9 @@ router.put(
   controllers.student.updateStudentVerifyingOfficer
 );
 router.post(
-  "/updatestudentimage/:regNo",
+  "/updatestudentdata",
   multerSingle,
-  controllers.student.updateStudentImage
+  controllers.student.updateStudentData
 );
 router.delete(
   "/deletestudent/:regNo",

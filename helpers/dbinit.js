@@ -17,6 +17,7 @@ drop table if exists colleges;
 drop table if exists result;
 drop table if exists secretary;
 drop table if exists student;
+drop table if exists notices;
 drop table if exists student_credentials;
 drop table if exists student_status;
 drop table if exists verifying_officers;
@@ -85,8 +86,9 @@ CREATE TABLE student (
 
 CREATE TABLE result (
 	regno varchar(255) NOT NULL,
-	collegeId varchar(255) NOT NULL,
-	status enum ('accepted', 'rejected', 'pending') NOT NULL,
+	college varchar(255) NOT NULL,
+	category enum('obc', 'sc', 'st', 'pwd', 'ews'),
+	status enum('accepted', 'rejected', 'pending') NOT NULL,
 	PRIMARY KEY (regno)
 );
 
@@ -155,7 +157,7 @@ ALTER TABLE verifying_officers ADD CONSTRAINT verifying_officers_fk1 FOREIGN KEY
 
 ALTER TABLE result ADD CONSTRAINT result_fk0 FOREIGN KEY (regno) REFERENCES student(regno) ON DELETE CASCADE;
 
-ALTER TABLE result ADD CONSTRAINT result_fk1 FOREIGN KEY (collegeId) REFERENCES colleges(id) ON DELETE CASCADE;
+ALTER TABLE result ADD CONSTRAINT result_fk1 FOREIGN KEY (college) REFERENCES colleges(id) ON DELETE CASCADE;
 
 ALTER TABLE student_status ADD CONSTRAINT student_status_fk0 FOREIGN KEY (regno) REFERENCES student(regno) ON DELETE CASCADE;
 

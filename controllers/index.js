@@ -18,7 +18,7 @@ module.exports = {
     getStudentsByVeryfingOfficer: require("./student/getstudentsbyveryfingofficer"),
     updateStudentVerifyingOfficer: require("./student/updateStudentVerifyingOfficer"),
     updateStudentVerifyingCollege: require("./student/updateStudentVerifyingCollege"),
-    updateStudentImage: require("./student/updateStudentImage"),
+    updateStudentData: require("./student/updateStudentData"),
     deleteStudent: require("./student/deleteStudent"),
   },
   college: {
@@ -44,7 +44,7 @@ module.exports = {
   },
   result: {
     getResult: require("./result/getResult"),
-    getStudentResult: require("./result/getStudentResult"),
+    getStudentResultByRegNo: require("./result/getStudentResultByRegNo"),
   },
   verify: {
     verifyStudent: require("./verify/verifyStudent"),
