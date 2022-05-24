@@ -21,6 +21,7 @@ module.exports = {
     updateStudentVerifyingCollege: require("./student/updateStudentVerifyingCollege"),
     updateStudentData: require("./student/updateStudentData"),
     deleteStudent: require("./student/deleteStudent"),
+    allocate: require("./student/allocate"),
   },
   college: {
     createCollege: require("./college/createCollege"),

@@ -72,5 +72,10 @@ router.delete(
   isAuthenticatedAdmin,
   controllers.student.deleteStudent
 );
+router.post(
+  "/allocate",
+  (req, res, next) => isAuthenticatedAdmin(req, res, next, ["c", "s"]),
+  controllers.student.allocate
+);
 
 module.exports = router;
