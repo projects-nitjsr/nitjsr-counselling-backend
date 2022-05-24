@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-
+const db = require("../../helpers/dbconnect");
 //Usage----------------------------------------------------------
 //(req, res, next) => isAuthenticatedAdmin(req, res, next, ["ci"]),
 //[roles] contains admins which can access the particular route
 //req.user = {designation, email}
 
-module.exports.isAuthenticatedAdmin = (
+module.exports.isAuthenticatedAdmin = async (
   req,
   res,
   next,
@@ -25,18 +25,26 @@ module.exports.isAuthenticatedAdmin = (
         process.env.ADMIN_SECRET
       );
       req.user = { email: email, designation: designation };
-      if (roles?.includes(designation)) {
-        next();
+
+      const sql = "SELECT token FROM admin_credentials WHERE email = ?";
+      const [admin] = await db.queryAsync(sql, [email]);
+      if (!admin) {
+        throw new Error("Not Authenticated");
       } else {
-        res.status(401).json({
-          message: "Not Authorised",
-          status: 0,
-        });
+        if (admin.token == null) {
+          throw new Error("Not Authenticated");
+        } else {
+          if (roles?.includes(designation)) {
+            next();
+          } else {
+            throw new Error("Not Authorised");
+          }
+        }
       }
     }
   } catch (err) {
     res.status(200).json({
-      message: "Not Authenticated",
+      message: err.message,
       status: 0,
     });
   }

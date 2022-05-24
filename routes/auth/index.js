@@ -1,5 +1,11 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
+const {
+  isAuthenticatedAdmin,
+} = require("../../middlewares/admin/isAuthenticatedAdmin");
+const {
+  isAuthenticatedStudent,
+} = require("../../middlewares/student/isAuthenticatedStudent");
 const validation = require("../../middlewares/validation");
 const validationSchema = require("./validationSchema");
 
@@ -8,12 +14,18 @@ router.get(
   validation(validationSchema.studentLoginValidation),
   controllers.auth.studentLogin
 );
-router.post("/student/logout", controllers.auth.studentLogout);
+router.get(
+  "/student/logout",
+  isAuthenticatedStudent,
+  controllers.auth.studentLogout
+);
 router.get(
   "/admin/login",
   validation(validationSchema.adminLoginValidation),
   controllers.auth.adminLogin
 );
+router.get("/admin/logout", isAuthenticatedAdmin, controllers.auth.adminLogout);
+
 router.post(
   "/student/forgotpassword",
   validation(validationSchema.forgotPasswordValidation),
