@@ -72,5 +72,9 @@ router.delete(
   isAuthenticatedAdmin,
   controllers.student.deleteStudent
 );
+router.post(
+  "/studentAction",
+  controllers.student.studentAction
+);
 
 module.exports = router;
