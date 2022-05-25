@@ -1,9 +1,9 @@
 const db = require("../../helpers/dbconnect");
 
 const rejectStudent = async (req, res) => {
-  const regNo = req.body.regNo || "CCQ59RJX1003";
-  const verifyingOfficer = req.body.email || "nkhfcacarr@nitbho.in";
-  const failureMessage = req.body.message || "sahi kar lo tojsdqhwdbhwqbdkjqwdqhwbhqw";
+  const regNo = req.body.regno;
+  const verifyingOfficer = req.body.email;
+  const failureMessage = req.body.message;
 
   try {
     if (failureMessage.length < 20)
