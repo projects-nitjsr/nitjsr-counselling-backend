@@ -1,17 +1,17 @@
 const db = require("../../helpers/dbconnect");
 
 const verifyStudent = async (req, res) => {
-  const regNo = req.body.regNo || "CCQ59RJX1003";
-  const verifyingOfficer = req.body.email || "nkhfcacarr@nitbho.in";
+  const regNo = req.body.regno;
+  const verifyingOfficer = req.body.email;
 
   try {
     const studentStatus = await db.queryAsync(
       "SELECT verifying_officer,regno FROM student_status WHERE regno = ?",
       [regNo]
     );
-    
+
     if (studentStatus.length == 0) throw new Error("student do not exist");
-   
+
     if (studentStatus[0].verifying_officer !== verifyingOfficer) {
       return res.status(401).json({ success: false, message: "not eligible" });
     }
