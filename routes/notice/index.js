@@ -5,9 +5,10 @@ const {
 } = require("../../middlewares/admin/isAuthenticatedAdmin");
 const validation = require("../../middlewares/validation");
 const validationSchema = require("./validationSchema");
-router.get("/", controller.notice.getNotices);
+
+router.get("/get", controller.notice.getNotices);
 router.post(
-  "/",
+  "/create",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["c", "s"]),
   validation(validationSchema.createNoticeValidation),
   controller.notice.createNotice

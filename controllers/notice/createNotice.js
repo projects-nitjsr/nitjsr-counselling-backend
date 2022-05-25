@@ -1,10 +1,8 @@
 const db = require("../../helpers/dbconnect");
 
 module.exports = async (req, res) => {
-  const notice =
-    req.body.notice ||
-    "hkgdckjhulifyrgfiryigoeruygtvasdwasdajkHGsaiusgdiuaghshjidgaiuygdisgsaiugsdiuwgaisgdia";
-  const user = req.body.user || "kxlscc";
+  const notice = req.body.notice;
+  const user = req.user.email;
   try {
     if (notice.length < 10) {
       return res.status(400).json({

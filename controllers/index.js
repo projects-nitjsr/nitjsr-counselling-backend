@@ -22,6 +22,7 @@ module.exports = {
     updateStudentData: require("./student/updateStudentData"),
     deleteStudent: require("./student/deleteStudent"),
     studentAction: require("./student/studentAction"),
+    allocate: require("./student/allocate"),
   },
   college: {
     createCollege: require("./college/createCollege"),
