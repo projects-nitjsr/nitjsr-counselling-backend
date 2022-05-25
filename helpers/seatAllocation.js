@@ -1,5 +1,6 @@
 const studentMeritList = require("./../constants/studentMeritList");
 const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
+const fs = require("fs");
 
 const calcSeats = (collegeSeatsWithId) => {
   let x = 0;
@@ -116,7 +117,7 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   Total Remaining College Seats = ${remainingSeats},
   `;
   //console.log(summary);
-  console.log(studentMeritList);
+  //console.log(studentMeritList);
 
   return {
     finalAllocation,
@@ -126,6 +127,17 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   };
 };
 
+// seatAllocation(studentMeritList, collegeSeatsWithId);
+
+// fs.writeFile(
+//   "allotmentResult.json",
+//   JSON.stringify(studentMeritList),
+//   function (err) {
+//     if (err) throw err;
+//     console.log("complete");
+//   }
+// );
+
 module.exports = seatAllocation;
 
-seatAllocation(studentMeritList, collegeSeatsWithId);
+//console.log(studentMeritList);
