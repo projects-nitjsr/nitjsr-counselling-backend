@@ -1,7 +1,5 @@
 const studentMeritList = require("./../constants/studentMeritList");
 const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
-<<<<<<< HEAD
-=======
 
 const calcSeats = (collegeSeatsWithId) => {
   let x = 0;
@@ -14,7 +12,6 @@ const calcSeats = (collegeSeatsWithId) => {
 
   return x;
 };
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 
 const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   const finalAllocation = [];
@@ -28,7 +25,7 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
     let generalPreference = null;
     let categoryPreference = null;
     const student = studentMeritList[j];
-    console.log(student);
+    //console.log(student);
 
     for (let i = 0; i < student.preferences.length; ++i) {
       if (collegeSeatsWithId[student.preferences[i]].general_seats > 0) {
@@ -121,16 +118,12 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   //console.log(summary);
   console.log(studentMeritList);
 
-<<<<<<< HEAD
-  return finalAllocation;
-=======
   return {
     finalAllocation,
     remainingStudents,
     remainingCollegeSeats: collegeSeatsWithId,
     noOfSeatsRemaining: remainingSeats,
   };
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 };
 
 module.exports = seatAllocation;

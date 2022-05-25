@@ -6,19 +6,15 @@ const adminLoginValidation = Joi.object({
     .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
     .required(),
 });
-
-const adminResetPasswordValidation = Joi.object({
-  regno: Joi.string().required(),
+//reset password validation can be used for both student and admin
+const resetPasswordValidation = Joi.object({
+  email: Joi.string().email().required(),
   password: Joi.string()
     .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
     .required(),
   token: Joi.string().required(),
 });
-<<<<<<< HEAD
-
-=======
 //forgot password validation for student
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 const forgotPasswordValidation = Joi.object({
   regno: Joi.string().required(),
 });
@@ -35,15 +31,23 @@ const studentLoginValidation = Joi.object({
     .required(),
 });
 
+const studentSignupValidation = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string()
+    .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
+    .required(),
+});
+
+const verifyStudentValidation = Joi.object({
+  regNo: Joi.string().required(),
+});
+
 module.exports = {
   adminLoginValidation,
-  adminResetPasswordValidation,
+  resetPasswordValidation,
   forgotPasswordValidation,
   studentLoginValidation,
-<<<<<<< HEAD
-=======
   studentSignupValidation,
   verifyStudentValidation,
   forgotPasswordValidationAdmin,
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 };

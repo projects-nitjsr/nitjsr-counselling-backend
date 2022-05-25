@@ -1,16 +1,5 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
-<<<<<<< HEAD
-
-router.get("/login", controllers.auth.studentLogin);
-router.get("/admin/login", controllers.auth.adminLogin);
-router.post("/student/forgotpassword", controllers.auth.studentForgotPassword);
-router.post("/student/resetpassword", controllers.auth.studentResetPassword);
-router.post("/student/verify", controllers.auth.studentVerify);
-router.post("/student/signUp", controllers.auth.studentSignUp);
-router.post("/admin/forgotpassword", controllers.auth.adminForgotPassword);
-router.post("/admin/resetpassword", controllers.auth.adminResetPassword);
-=======
 const {
   isAuthenticatedAdmin,
 } = require("../../middlewares/admin/isAuthenticatedAdmin");
@@ -60,5 +49,4 @@ router.post(
   controllers.auth.adminResetPassword
 );
 
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 module.exports = router;

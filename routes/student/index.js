@@ -1,14 +1,11 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
-<<<<<<< HEAD
-=======
 const {
   isAuthenticatedAdmin,
 } = require("../../middlewares/admin/isAuthenticatedAdmin");
 const validationSchema = require("./validationSchema");
 const validation = require("../../middlewares/validation");
 const multerSingle = require("../../middlewares/multerSingle");
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 
 router.get(
   "/verifyingcollege",
@@ -24,12 +21,6 @@ router.get(
 
 router.get("/", isAuthenticatedAdmin, controllers.student.getStudents);
 router.put(
-<<<<<<< HEAD
-  "/updatestudentstatus/:regNo",
-  controllers.student.updateStudentStatus
-  );
-router.delete("/deletestudent/:regNo", controllers.student.deleteStudent);
-=======
   "/verify",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["vo"]),
   controllers.verify.verifyStudent
@@ -81,6 +72,5 @@ router.delete(
   isAuthenticatedAdmin,
   controllers.student.deleteStudent
 );
->>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 
 module.exports = router;
