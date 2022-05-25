@@ -1,9 +1,8 @@
 const db = require("../../helpers/dbconnect");
 
 const confirmDecision = async (req, res) => {
-  const regNo = req.body.regNo || "CCQ59RJX1003";
-  const centerInchargeEmail =
-    req.body.email || "centerincharge.nitbho@nimcet.in";
+  const regNo = req.body.regno;
+  const centerInchargeEmail = req.body.email;
 
   try {
     const studentStatus = await db.queryAsync(
