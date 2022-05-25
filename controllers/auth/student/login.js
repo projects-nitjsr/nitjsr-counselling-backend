@@ -12,26 +12,28 @@ const login = async (req, res) => {
       });
     } else {
       let sql = `SELECT * from student_credentials where regno = ?`;
-      const [student] = await db.queryAsync(sql, [regno]);
-      if (!student) {
+      const student = await db.queryAsync(sql, [regno]);
+      if (student.length == 0) {
         res.status(200).json({
           message: "Bad Credentials",
           status: 0,
         });
       } else {
-        let check = await bcrypt.compare(password.trim(), student.password);
+        let check = await bcrypt.compare(password.trim(), student[0].password);
         if (check) {
           let accessToken = jwt.sign(
             {
-              regno: student.regno,
+              regno: student[0].regno,
               role: "student",
             },
             process.env.STUDENT_SECRET
           );
+
           let sql = `UPDATE student_credentials SET token = ? where regno = ?`;
           await db.queryAsync(sql, [accessToken, regno]);
           res.status(200).json({
             status: 1,
+            message: "logged in successfully",
             token: accessToken,
             role: "student",
           });
@@ -45,7 +47,7 @@ const login = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: "Internal Server Error " + err,
+      message: "Internal Server Error " + err.message,
       status: 0,
     });
   }

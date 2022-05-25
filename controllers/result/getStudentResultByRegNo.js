@@ -1,6 +1,6 @@
 const db = require("../../helpers/dbconnect");
 
-const getStudentResult = async (req, res) => {
+const getStudentResultByRegNo = async (req, res) => {
   const studentRegNo = req.params.regNo;
 
   try {
@@ -19,4 +19,4 @@ const getStudentResult = async (req, res) => {
   }
 };
 
-module.exports = getStudentResult;
+module.exports = getStudentResultByRegNo;

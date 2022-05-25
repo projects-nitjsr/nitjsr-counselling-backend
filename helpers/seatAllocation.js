@@ -1,8 +1,28 @@
 const studentMeritList = require("./../constants/studentMeritList");
 const collegeSeatsWithId = require("./../constants/collegeSeatsWithId");
+<<<<<<< HEAD
+=======
+
+const calcSeats = (collegeSeatsWithId) => {
+  let x = 0;
+
+  for (const c in collegeSeatsWithId) {
+    for (const d in collegeSeatsWithId[c]) {
+      x += collegeSeatsWithId[c][d];
+    }
+  }
+
+  return x;
+};
+>>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 
 const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
   const finalAllocation = [];
+  const remainingStudents = [];
+
+  let totalSeats = calcSeats(collegeSeatsWithId);
+
+  studentMeritList.sort((a, b) => a.generalRank - b.generalRank);
 
   for (let j = 0; j < studentMeritList.length; ++j) {
     let generalPreference = null;
@@ -49,6 +69,7 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: "general",
           });
+          student.seatAllotmentCategory = "general";
         } else {
           --collegeSeatsWithId[student.preferences[preference]][
             `${student.category}_seats`
@@ -58,6 +79,7 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: student.category,
           });
+          student.seatAllotmentCategory = student.category;
         }
       } else {
         ++collegeSeatsWithId[student.preferences[student.currentSeatIndex]][
@@ -70,6 +92,7 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: "general",
           });
+          student.seatAllotmentCategory = "general";
         } else {
           --collegeSeatsWithId[student.preferences[preference]][
             `${student.category}_seats`
@@ -79,14 +102,37 @@ const seatAllocation = (studentMeritList, collegeSeatsWithId) => {
             allotedCollegeId: student.preferences[preference],
             category: student.category,
           });
+          student.seatAllotmentCategory = student.category;
         }
       }
+      student.currentSeatIndex = preference;
+    } else {
+      remainingStudents.push(student);
     }
   }
 
-  console.log(finalAllocation);
+  let remainingSeats = calcSeats(collegeSeatsWithId);
+  const summary = `
+  Total No of Colleges Seats= ${totalSeats},
+  Total no of students considered = ${studentMeritList.length},
+  Total no of seats allocated = ${finalAllocation.length},
+  Total Remaining College Seats = ${remainingSeats},
+  `;
+  //console.log(summary);
+  console.log(studentMeritList);
 
+<<<<<<< HEAD
   return finalAllocation;
+=======
+  return {
+    finalAllocation,
+    remainingStudents,
+    remainingCollegeSeats: collegeSeatsWithId,
+    noOfSeatsRemaining: remainingSeats,
+  };
+>>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 };
+
+module.exports = seatAllocation;
 
 seatAllocation(studentMeritList, collegeSeatsWithId);

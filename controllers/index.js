@@ -1,5 +1,6 @@
 module.exports = {
   auth: {
+    adminLogout: require("./auth/admin/logout"),
     adminLogin: require("./auth/admin/login"),
     studentLogin: require("./auth/student/login"),
     studentVerify: require("./auth/student/verifyStudent"),
@@ -15,7 +16,13 @@ module.exports = {
     getStudentStatus: require("./student/getStudentStatus"),
     getStudentsByVerifingCollege: require("./student/getstudentsbyverifingcollege"),
     getStudentsByVeryfingOfficer: require("./student/getstudentsbyveryfingofficer"),
+<<<<<<< HEAD
     updateStudentStatus: require("./student/updateStudentStatus"),
+=======
+    updateStudentVerifyingOfficer: require("./student/updateStudentVerifyingOfficer"),
+    updateStudentVerifyingCollege: require("./student/updateStudentVerifyingCollege"),
+    updateStudentData: require("./student/updateStudentData"),
+>>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
     deleteStudent: require("./student/deleteStudent"),
   },
   college: {
@@ -40,7 +47,7 @@ module.exports = {
   },
   result: {
     getResult: require("./result/getResult"),
-    getStudentResult: require("./result/getStudentResult"),
+    getStudentResultByRegNo: require("./result/getStudentResultByRegNo"),
   },
   verify: {
     verifyStudent: require("./verify/verifyStudent"),

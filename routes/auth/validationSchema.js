@@ -1,11 +1,10 @@
 const Joi = require("@hapi/joi");
 
 const adminLoginValidation = Joi.object({
-  regno: Joi.string().required(),
+  email: Joi.string().email().required(),
   password: Joi.string()
     .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
     .required(),
-  designation: Joi.string().required(),
 });
 
 const adminResetPasswordValidation = Joi.object({
@@ -13,9 +12,19 @@ const adminResetPasswordValidation = Joi.object({
   password: Joi.string()
     .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
     .required(),
+  token: Joi.string().required(),
+});
+<<<<<<< HEAD
+
+=======
+//forgot password validation for student
+>>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
+const forgotPasswordValidation = Joi.object({
+  regno: Joi.string().required(),
 });
 
-const forgotPasswordValidation = Joi.object({
+//forgot password validation for admin
+const forgotPasswordValidationAdmin = Joi.object({
   email: Joi.string().email().required(),
 });
 
@@ -31,4 +40,10 @@ module.exports = {
   adminResetPasswordValidation,
   forgotPasswordValidation,
   studentLoginValidation,
+<<<<<<< HEAD
+=======
+  studentSignupValidation,
+  verifyStudentValidation,
+  forgotPasswordValidationAdmin,
+>>>>>>> 7137a31f7564407111c8fd1a00aa4b30077ba94b
 };
