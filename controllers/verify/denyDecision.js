@@ -2,7 +2,7 @@ const db = require("../../helpers/dbconnect");
 
 const denyDecision = async (req, res) => {
   const regNo = req.body.regno;
-  const centerInchargeEmail = req.body.email;
+  const centerInchargeEmail = req.user.email;
 
   try {
     const studentStatus = await db.queryAsync(
@@ -24,7 +24,7 @@ const denyDecision = async (req, res) => {
     }
 
     await db.queryAsync(
-      "UPDATE student_status SET applicationStatus= 'pending', acceptedBy = NULL,rejectedBy = NULL,confirmationPending = ?,failureDesc = NULL WHERE regno = ? ",
+      "UPDATE student_status SET categoryRejection=false, applicationStatus= 'pending', acceptedBy = NULL,rejectedBy = NULL,confirmationPending = ?,failureDesc = NULL WHERE regno = ? ",
       [false, regNo]
     );
 
