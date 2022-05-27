@@ -28,7 +28,7 @@ const registerNewUser = async (req, res) => {
         VALUES 
         (?,?,null)`;
         await db.queryAsync(sql, [student[0].regno, hashedPassword]);
-        console.log(res);
+
         res.status(200).json({
           message: "Student Signed up successfully",
           status: 1,

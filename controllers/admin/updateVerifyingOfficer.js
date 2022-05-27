@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   const image = req.file;
 
   try {
-    if (!name || !image) throw new Error("Nothing to update!!");
+    if (!name && !image) throw new Error("Nothing to update!!");
     if (name) {
       await db.queryAsync(
         "UPDATE verifying_officers SET name = ? WHERE email = ?",
