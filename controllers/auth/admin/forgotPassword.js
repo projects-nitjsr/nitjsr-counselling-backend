@@ -26,6 +26,7 @@ const forgotPassword = async (req, res) => {
           process.env.ADMIN_FORGOT_PASSWORD_SECRET,
           { expiresIn: "1h" }
         );
+        console.log(token);
 
         //Sending Mail for resetting password
         await mailer(

@@ -2,7 +2,7 @@ const db = require("../../helpers/dbconnect");
 
 const confirmDecision = async (req, res) => {
   const regNo = req.body.regno;
-  const centerInchargeEmail = req.body.email;
+  const centerInchargeEmail = req.user.email;
 
   try {
     const studentStatus = await db.queryAsync(
@@ -22,13 +22,13 @@ const confirmDecision = async (req, res) => {
     ) {
       return res.status(401).json({ success: false, message: "not eligible" });
     }
-
+    
     let applicationStatus = "verified";
     if (studentStatus[0].acceptedBy == null) {
       applicationStatus = "rejected";
     }
     await db.queryAsync(
-      "UPDATE student_status SET applicationStatus=?, confirmationPending = ?,failureDesc = NULL WHERE regno = ? ",
+      "UPDATE student_status SET  applicationStatus=?, confirmationPending = ?,failureDesc = NULL WHERE regno = ? ",
       [applicationStatus, false, regNo]
     );
 

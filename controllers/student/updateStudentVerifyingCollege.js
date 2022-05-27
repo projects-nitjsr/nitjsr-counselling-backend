@@ -13,8 +13,6 @@ const updateStudentVerifyingCollege = async (req, res) => {
     ]);
   }
 
-  console.log(verifyingArray);
-
   try {
     let queries = "SET autocommit=0;START TRANSACTION;";
     const deferred = q.defer();

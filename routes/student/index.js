@@ -73,6 +73,9 @@ router.delete(
   controllers.student.deleteStudent
 );
 router.post(
+  "/studentAction",
+  controllers.student.studentAction)
+  router.post(
   "/allocate",
   (req, res, next) => isAuthenticatedAdmin(req, res, next, ["c", "s"]),
   controllers.student.allocate

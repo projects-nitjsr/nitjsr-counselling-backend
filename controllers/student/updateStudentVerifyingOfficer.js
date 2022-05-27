@@ -30,11 +30,6 @@ const updateStudentVerifyingOfficer = async (req, res) => {
         .json({ success: false, message: "Verifying officer does not exist" });
     }
 
-    console.log(
-      centerInchargeCollege[0].college,
-      verifyingOfficerCollege[0].college
-    );
-
     if (
       verifyingOfficerCollege[0].college !== centerInchargeCollege[0].college
     ) {
