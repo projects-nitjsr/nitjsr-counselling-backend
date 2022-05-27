@@ -2,7 +2,7 @@ const db = require("../../helpers/dbconnect");
 
 const verifyStudent = async (req, res) => {
   const regNo = req.body.regno;
-  const verifyingOfficer = req.body.email;
+  const verifyingOfficer = req.user.email;
 
   try {
     const studentStatus = await db.queryAsync(
@@ -17,7 +17,7 @@ const verifyStudent = async (req, res) => {
     }
 
     await db.queryAsync(
-      "UPDATE student_status SET acceptedBy = ?,rejectedBy = NULL,failureDesc= NULL,confirmationPending = ? WHERE regno = ? ",
+      "UPDATE student_status SET categoryRejection=false, acceptedBy = ?,rejectedBy = NULL,failureDesc= NULL,confirmationPending = ? WHERE regno = ? ",
       [verifyingOfficer, true, regNo]
     );
 
