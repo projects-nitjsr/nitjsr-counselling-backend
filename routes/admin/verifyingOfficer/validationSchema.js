@@ -10,15 +10,19 @@ const createVerifyingOfficerValidation = Joi.object({
 
 const deleteVerifyingOfficerValidation = Joi.object({
   email: Joi.string().email().required(),
+  verifyingOfficeremail: Joi.string().email().required(),
 });
 
 const updateVerifyingOfficerValidation = Joi.object({
   email: Joi.string().email().required(),
   name: Joi.string().required(),
 });
-
+const getVerifyingOfficerByEmail = Joi.object({
+  email: Joi.string().email().required(),
+});
 module.exports = {
   createVerifyingOfficerValidation,
   deleteVerifyingOfficerValidation,
   updateVerifyingOfficerValidation,
+  getVerifyingOfficerByEmail,
 };
