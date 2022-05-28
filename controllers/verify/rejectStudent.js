@@ -2,8 +2,9 @@ const db = require("../../helpers/dbconnect");
 
 const rejectStudent = async (req, res) => {
   const regNo = req.body.regno;
-  const verifyingOfficer = req.body.email;
+  const verifyingOfficer = req.user.email;
   const failureMessage = req.body.message;
+  const isCategoryRejection= req.body.categoryRejection || false;
 
   try {
     if (failureMessage.length < 20)
@@ -20,8 +21,8 @@ const rejectStudent = async (req, res) => {
     }
 
     await db.queryAsync(
-      "UPDATE student_status SET applicationStatus='pending', acceptedBy= NULL , rejectedBy = ?,confirmationPending = ?,failureDesc = ? WHERE regno = ? ",
-      [verifyingOfficer, true, failureMessage, regNo]
+      "UPDATE student_status SET categoryRejection=?,applicationStatus='pending', acceptedBy= NULL , rejectedBy = ?,confirmationPending = ?,failureDesc = ? WHERE regno = ? ",
+      [isCategoryRejection,verifyingOfficer, true, failureMessage, regNo]
     );
 
     res.status(200).json({ success: true, message: "rejected succesfully" });

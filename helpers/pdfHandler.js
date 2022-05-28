@@ -29,7 +29,7 @@ const uploadPdf = async (data) => {
   }
 };
 
-const deletePdf = (pdfUrl) => {
+const deletePdf = async(pdfUrl) => {
   try {
     let fileName = pdfUrl.split(`/${process.env.CLOUDINARY_FOLDER}/`)[1];
     let publicId = `${process.env.CLOUDINARY_FOLDER}/` + fileName.split(".")[0];
