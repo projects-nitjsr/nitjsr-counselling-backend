@@ -4,7 +4,7 @@ const imageUploader = require("../../helpers/imageHandler");
 module.exports = async (req, res) => {
   const centerInchargeEmail =
     req.body.email || "centerincharge.nitwara@nimcet.in";
-  const VerifyingOfficerEmail = req.params.email;
+  const VerifyingOfficerEmail = req.body.verifyingOfficeremail;
 
   try {
     if (!centerInchargeEmail) throw new Error("No Auth");
