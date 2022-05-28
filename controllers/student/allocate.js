@@ -2,7 +2,7 @@ const db = require("../../helpers/dbconnect");
 const seatAllocation = require("../../helpers/seatAllocation");
 const q = require("q");
 const mysql = require("mysql");
-const studentMeritList = require("../../constants/studentMeritList");
+const categoryRejection = require("../../helpers/categoryRejection");
 
 const phaseMeritListUpdate = (studentMeritList, phase) => {
   let queries = "SET autocommit=0;START TRANSACTION;";
@@ -35,6 +35,8 @@ const phaseResultUpdate = async (result, phase) => {
 
 const allocate = async (req, res) => {
   try {
+    await categoryRejection();
+
     // Get the initial list of students
     let studentMeritList = await db.queryAsync("SELECT * FROM student");
 

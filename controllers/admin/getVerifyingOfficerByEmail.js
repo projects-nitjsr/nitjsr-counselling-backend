@@ -1,7 +1,7 @@
 const db = require("../../helpers/dbconnect");
 
 module.exports = async (req, res) => {
-  const verifyingOfficerEmail = req.params.email;
+  const verifyingOfficerEmail = req.body.email;
   try {
     const verifyingOfficer = await db.queryAsync(
       `SELECT a.*,
