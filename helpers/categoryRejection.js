@@ -10,7 +10,7 @@ module.exports=async()=>{
     
   let query = "SET autocommit=0;START TRANSACTION;";
 
-  studentStatus.forEach(function (item) {
+  studentStatus.forEach(async function (item) {
     query += mysql.format(
       "UPDATE student SET category = NULL,categoryRank=NULL WHERE regno = ?; ",
       [item.regno]
