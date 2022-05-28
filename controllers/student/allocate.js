@@ -2,7 +2,36 @@ const db = require("../../helpers/dbconnect");
 const seatAllocation = require("../../helpers/seatAllocation");
 const q = require("q");
 const mysql = require("mysql");
-const categoryRejection=require("../../helpers/categoryRejection");
+const categoryRejection = require("../../helpers/categoryRejection");
+
+const phaseMeritListUpdate = (studentMeritList, phase) => {
+  let queries = "SET autocommit=0;START TRANSACTION;";
+  const deferred = q.defer();
+
+  studentMeritList.forEach((student) => {
+    queries += mysql.format(
+      "INSERT INTO phase_merit_list (phase, regno) VALUES(?, ?);",
+      [phase, student.regno]
+    );
+  });
+
+  queries += "COMMIT;SET autocommit=1;";
+  db.query(queries, deferred.makeNodeResolver());
+};
+
+const phaseResultUpdate = async (result, phase) => {
+  let queries = "SET autocommit=0;START TRANSACTION;";
+
+  result.forEach((res) => {
+    queries += mysql.format(
+      "INSERT INTO phase_result (phase, regno, college, category) VALUES(?, ?, ?, ?);",
+      [phase, res.studentRegNo, res.allotedCollegeId, res.category]
+    );
+  });
+
+  queries += "COMMIT;SET autocommit=1;";
+  await db.queryAsync(queries);
+};
 
 const allocate = async (req, res) => {
   try {
@@ -16,6 +45,8 @@ const allocate = async (req, res) => {
       "SELECT * FROM colleges"
     );
 
+    // [{id:1,g_seats:12,}] => {1:{g_seats:12,}}
+
     if (studentMeritList.length == 0) {
       throw new Error("No students found");
     }
@@ -27,8 +58,13 @@ const allocate = async (req, res) => {
     // Take only those students who either don't have any seat or have floated their last seat
     studentMeritList = studentMeritList.filter(
       (student) =>
-        student.currentSeatIndex === null || student.studentAction === "float"
+        (student.currentSeatIndex === null &&
+          student.paymentDetails !== null) ||
+        student.studentAction === "float"
     );
+
+    // Update phase_merit_list
+    phaseMeritListUpdate(studentMeritList, req.allocationPhase);
 
     // Prepare student merit list so as to pass to the seat allocation function
     studentMeritList = studentMeritList.map((student) => {
@@ -37,7 +73,7 @@ const allocate = async (req, res) => {
         generalRank: student.generalRank,
         category: student.category,
         categoryRank: student.categoryRank,
-        preferences: student.preferences.split(" "),
+        preferences: student.preferences.split(" "), // "1 2 3 4 5 6"
         currentSeatIndex: student.currentSeatIndex,
         seatAllotmentCategory: student.seatAllotmentCategory,
       };
@@ -64,6 +100,9 @@ const allocate = async (req, res) => {
     });
 
     const result = seatAllocation(studentMeritList, collegeSeatsWithId);
+
+    // Update phase_result
+    await phaseResultUpdate(result.finalAllocation, req.allocationPhase);
 
     // Update student table with the new data
     let queries = "SET autocommit=0;START TRANSACTION;";
@@ -118,14 +157,51 @@ const allocate = async (req, res) => {
       );
     });
 
+    queries += mysql.format(
+      "UPDATE allocation_status SET status = ?, startTime = ? WHERE phase = ?;",
+      ["completed", null, req.allocationPhase]
+    );
+
     queries += "COMMIT;SET autocommit=1;";
 
     db.query(queries, deferred.makeNodeResolver());
-
-    res.status(200).json({ success: true, message: "Seat allocation done" });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.log(err.message);
   }
 };
 
-module.exports = allocate;
+module.exports = async (req, res) => {
+  const allocationPhase = req.allocationPhase;
+  const allocationStatus = await db.queryAsync(
+    "SELECT * FROM allocation_status WHERE phase = ?",
+    [allocationPhase]
+  );
+
+  if (
+    allocationStatus[0].status === "pending" ||
+    allocationStatus[0].status === "failed"
+  ) {
+    allocate(req, res);
+    await db.queryAsync(
+      "UPDATE allocation_status SET status = 'started', startTime = ? WHERE phase = ?",
+      [Date.now(), allocationPhase]
+    );
+    res.send({ success: true, message: "Result generation has been started." });
+  } else if (allocationStatus[0].status === "started") {
+    if (Date.now() - Number(allocationStatus[0].startTime) > 30 * 60000) {
+      // Failed
+      await db.queryAsync(
+        "UPDATE allocation_status SET status = 'failed', startTime = ? WHERE phase = ?",
+        [null, allocationPhase]
+      );
+      return res.send({
+        success: false,
+        message: "Result generation failed",
+      });
+    }
+    res.send({
+      success: true,
+      message: "Result generation already in progress.",
+    });
+  }
+};
